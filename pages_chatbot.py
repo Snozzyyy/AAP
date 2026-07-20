@@ -406,13 +406,6 @@ def show_ai_symptom_diagnoser():
 
                     st.markdown("### Urgency Assessment")
                     urgency_level = urgency_info.get("urgency_level", "Medium")
-                    urgency_icons = {
-                        "Low": "\u2705",
-                        "Medium": "\u26a0\ufe0f",
-                        "High": "\U0001f536",
-                        "Emergency": "\U0001f6a8"
-                    }
-                    icon = urgency_icons.get(urgency_level, "\u26a0\ufe0f")
 
                     urgency_colors = {
                         "Low": "#38A169",
@@ -424,8 +417,8 @@ def show_ai_symptom_diagnoser():
                     st.markdown(f"""
                     <div style="background: #111111; border-left: 4px solid {u_color};
                                 border-radius: 8px; padding: 16px; margin: 8px 0;">
-                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">
-                            {icon} {urgency_level}
+                        <div style="font-size: 16px; font-weight: 600; margin-bottom: 4px; color: {u_color}; text-transform: uppercase; letter-spacing: 0.5px;">
+                            {urgency_level} URGENCY
                         </div>
                         <p style="color: #A0A0A0; font-size: 13px; margin: 0;">
                             {urgency_info.get("explanation", "")}
