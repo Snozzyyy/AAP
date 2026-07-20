@@ -5,13 +5,17 @@ GLOBAL_CSS = """
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
     /* Global Reset */
-    html, body, [class*="css"], .stApp, .main, .block-container,
+    html, body, .stApp, .main, .block-container,
     [data-testid="stAppViewContainer"], [data-testid="stHeader"],
     [data-testid="stToolbar"], [data-testid="stDecoration"],
     [data-testid="stStatusWidget"], section[data-testid="stSidebar"] {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
         background-color: #000000 !important;
         color: #FFFFFF !important;
+    }
+
+    .material-symbols-outlined, [class*="material-symbols"], [data-testid="stIcon"] {
+        font-family: 'Material Symbols Outlined', 'Material Icons' !important;
     }
 
     .stApp {
@@ -594,6 +598,39 @@ GLOBAL_CSS = """
         }
     }
 
+    /* ─── Selectbox / Dropdown Styles ───────────────────────────────── */
+
+    div[data-baseweb="select"] {
+        background-color: #111111 !important;
+        border: 1px solid #2D2D2D !important;
+        border-radius: 8px !important;
+    }
+
+    div[data-baseweb="select"] * {
+        color: #FFFFFF !important;
+        background-color: transparent !important;
+    }
+
+    div[data-baseweb="select"] [data-baseweb="icon"] {
+        fill: #FFFFFF !important;
+    }
+
+    div[data-baseweb="popover"], div[data-baseweb="menu"], ul[role="listbox"] {
+        background-color: #111111 !important;
+        border: 1px solid #2D2D2D !important;
+    }
+
+    li[role="option"], div[role="option"] {
+        background-color: #111111 !important;
+        color: #FFFFFF !important;
+    }
+
+    li[role="option"]:hover, div[role="option"]:hover,
+    li[role="option"][aria-selected="true"], div[role="option"][aria-selected="true"] {
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
+    }
+
     /* ─── Chatbot Page Styles ────────────────────────────────────────── */
 
     [data-testid="stChatMessage"] {
@@ -613,53 +650,61 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
     }
 
+    /* Chat Avatar Styling */
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
+    }
+
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
+    }
+
+    /* Streamlit Standard Chat Input - Dark Minimalist Theme */
     [data-testid="stChatInput"] {
         background-color: #000000 !important;
-        border-top: 1px solid #2D2D2D !important;
+        padding-top: 8px !important;
+        padding-bottom: 16px !important;
+        border: none !important;
+    }
+
+    [data-testid="stChatInput"] > div {
+        background-color: #111111 !important;
+        border: 1px solid #2D2D2D !important;
+        border-radius: 12px !important;
     }
 
     [data-testid="stChatInput"] textarea {
-        background-color: #FFFFFF !important;
-        color: #000000 !important;
-        caret-color: #000000 !important;
-        border: 1px solid #2D2D2D !important;
-        border-radius: 8px !important;
+        background-color: transparent !important;
+        color: #FFFFFF !important;
+        caret-color: #FFFFFF !important;
         font-family: 'Inter', sans-serif !important;
         font-size: 14px !important;
+        border: none !important;
     }
 
     [data-testid="stChatInput"] textarea::placeholder {
-        color: #999999 !important;
-    }
-
-    [data-testid="stChatInput"] textarea:focus {
-        border-color: #FFFFFF !important;
-        box-shadow: 0 0 0 2px rgba(255,255,255,0.2) !important;
+        color: #777777 !important;
     }
 
     [data-testid="stChatInput"] button {
-        background-color: #FFFFFF !important;
-        color: #000000 !important;
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
+        border: none !important;
         border-radius: 8px !important;
     }
 
     [data-testid="stChatInput"] button:hover {
-        background-color: rgba(255,255,255,0.85) !important;
+        background-color: #444444 !important;
     }
 
     [data-testid="stChatInput"] button svg {
-        fill: #000000 !important;
-        color: #000000 !important;
+        fill: #FFFFFF !important;
+        color: #FFFFFF !important;
     }
 
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
-        background-color: #2D2D2D !important;
-    }
-
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
-        background-color: #FFFFFF !important;
-    }
-
+    /* Expander Styling */
     [data-testid="stExpander"] {
         background: #111111 !important;
         border: 1px solid #2D2D2D !important;
@@ -675,6 +720,7 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
     }
 
+    /* Progress Bar */
     [data-testid="stProgress"] > div {
         background-color: #2D2D2D !important;
         border-radius: 4px !important;
