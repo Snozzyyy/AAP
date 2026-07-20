@@ -50,7 +50,7 @@ GLOBAL_CSS = """
     }
 
     /* Typography */
-    h1, h2, h3, h4, h5, h6, p, span, label, div {
+    h1, h2, h3, h4, h5, h6, p, label, div {
         color: #FFFFFF !important;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
     }
@@ -650,16 +650,47 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
     }
 
-    /* Chat Avatar Styling */
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
-        background-color: #2D2D2D !important;
-        color: #FFFFFF !important;
-    }
-
+    /* Chat Avatar Styling - clean badge labels */
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"],
     [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
         background-color: #2D2D2D !important;
         color: #FFFFFF !important;
+        border-radius: 6px !important;
+        width: auto !important;
+        height: auto !important;
+        padding: 4px 10px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
     }
+
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] span,
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] span {
+        font-size: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        display: none !important;
+    }
+
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"]::after {
+        content: "Patient";
+        font-family: 'Inter', sans-serif !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        color: #FFFFFF !important;
+        white-space: nowrap;
+    }
+
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"]::after {
+        content: "AI Assistant";
+        font-family: 'Inter', sans-serif !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        color: #FFFFFF !important;
+        white-space: nowrap;
+    }
+
 
     /* Streamlit Standard Chat Input - Dark Minimalist Theme */
     [data-testid="stChatInput"] {
@@ -718,15 +749,31 @@ GLOBAL_CSS = """
 
     [data-testid="stExpander"] summary span {
         color: #FFFFFF !important;
+        font-family: 'Inter', sans-serif !important;
     }
 
-    /* Progress Bar */
+    /* Hide icon text bleeding into expander titles */
+    [data-testid="stExpander"] summary span[data-testid="stIconMaterial"],
+    [data-testid="stExpander"] summary .material-symbols-outlined {
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        display: none !important;
+    }
+
+    /* Progress Bar - track is dark, only filled portion is white */
     [data-testid="stProgress"] > div {
-        background-color: #2D2D2D !important;
+        background-color: transparent !important;
         border-radius: 4px !important;
     }
 
     [data-testid="stProgress"] > div > div {
+        background-color: #2D2D2D !important;
+        border-radius: 4px !important;
+    }
+
+    [data-testid="stProgress"] > div > div > div {
         background-color: #FFFFFF !important;
         border-radius: 4px !important;
     }
