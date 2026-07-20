@@ -1,1 +1,5 @@
-streamlit>=1.35.0
+streamlit
+tensorflow-cpu
+numpy
+google-genai
+scikit-learn
