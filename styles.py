@@ -207,6 +207,26 @@ GLOBAL_CSS = """
         fill: #000000 !important;
     }
 
+    /* Dropdown menu popover */
+    [data-baseweb="popover"] {
+        background-color: #FFFFFF !important;
+    }
+
+    [data-baseweb="popover"] div,
+    [data-baseweb="popover"] li,
+    [data-baseweb="popover"] span,
+    [data-baseweb="menu"] div,
+    [data-baseweb="menu"] li,
+    [data-baseweb="list"] li {
+        color: #000000 !important;
+        background-color: #FFFFFF !important;
+    }
+
+    [data-baseweb="menu"] [role="option"]:hover {
+        background-color: #F0F0F0 !important;
+        color: #000000 !important;
+    }
+
     /* Buttons - Primary (black bg, white text, grey border) */
     .stButton > button {
         background-color: #000000 !important;
