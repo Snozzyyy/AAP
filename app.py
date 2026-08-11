@@ -20,7 +20,8 @@ if "user" not in st.session_state:
     st.session_state.user = None
 
 protected_pages = {
-    "patient_dashboard", "doctor_dashboard", "admin_dashboard"
+    "patient_dashboard", "doctor_dashboard", "admin_dashboard",
+    "feature_ai_symptom_patient"
 } | set(FEATURE_ROUTES.keys())
 
 if st.session_state.user is None and st.session_state.page in protected_pages:
@@ -38,6 +39,9 @@ elif page == "doctor_dashboard":
     show_doctor_dashboard()
 elif page == "admin_dashboard":
     show_admin_dashboard()
+elif page == "feature_ai_symptom_patient":
+    from pages_chatbot import show_ai_symptom_diagnoser
+    show_ai_symptom_diagnoser()
 elif page in FEATURE_ROUTES:
     show_feature_page(page)
 else:

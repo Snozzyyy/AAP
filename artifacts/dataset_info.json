@@ -1,0 +1,50 @@
+{
+  "project": "AI Health Chatbot \u2014 Pre-Triage",
+  "course": "IT3100 AI Application Project",
+  "original_dataset": "Final_Augmented_dataset_Diseases_and_Symptoms.csv",
+  "original_shape": [
+    101860,
+    378
+  ],
+  "original_num_diseases": 333,
+  "min_samples_threshold": 50,
+  "diseases_removed": 158,
+  "num_classes": 175,
+  "num_features": 252,
+  "zero_variance_features_removed": 125,
+  "processed_shape": [
+    75254,
+    253
+  ],
+  "split_ratios": {
+    "train": 0.7,
+    "validation": 0.15,
+    "test": 0.15
+  },
+  "split_sizes": {
+    "X_train": [
+      52677,
+      252
+    ],
+    "y_train": [
+      52677
+    ],
+    "X_val": [
+      11288,
+      252
+    ],
+    "y_val": [
+      11288
+    ],
+    "X_test": [
+      11289,
+      252
+    ],
+    "y_test": [
+      11289
+    ]
+  },
+  "random_state": 42,
+  "feature_dtype": "float32",
+  "label_dtype": "int64"
+}

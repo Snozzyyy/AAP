@@ -3,10 +3,10 @@ from styles import coming_soon_page
 
 
 FEATURE_ROUTES = {
-    "feature_ai_symptom_patient": ("AI Symptom Diagnoser", "patient_dashboard"),
     "feature_book_appointment": ("Book an Appointment", "patient_dashboard"),
-    "feature_appointment_notes": ("Create Appointment Notes", "doctor_dashboard"),
-    "feature_billing_assistant": ("Billing Assistant", "doctor_dashboard"),
+    "feature_active_cases": ("Active Cases and AI Triage", "doctor_dashboard"),
+    "feature_archived_records": ("Archived Records", "doctor_dashboard"),
+    "feature_complication_risk": ("Complication Risk Alert", "doctor_dashboard"),
 }
 
 
