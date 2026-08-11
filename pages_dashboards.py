@@ -63,28 +63,39 @@ def show_doctor_dashboard():
     st.markdown('<p style="color:#A0A0A0;font-size:14px;margin-top:0;">What would you like to do today?</p>', unsafe_allow_html=True)
     st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
 
-    col1, col2 = st.columns(2, gap="medium")
+    col1, col2, col3 = st.columns(3, gap="medium")
 
     with col1:
         feature_card_html(
             icon="",
-            title="Create Appointment Notes",
-            description="Create and manage clinical notes for patient appointments",
-            card_id="doctor_notes"
+            title="Active Cases and AI Triage",
+            description="View active patient cases with AI-powered triage priority and symptom analysis",
+            card_id="doctor_active_cases"
         )
-        if st.button("OPEN", key="doctor_notes_btn", use_container_width=True):
-            st.session_state.page = "feature_appointment_notes"
+        if st.button("OPEN", key="doctor_active_cases_btn", use_container_width=True):
+            st.session_state.page = "feature_active_cases"
             st.rerun()
 
     with col2:
         feature_card_html(
             icon="",
-            title="Billing Assistant",
-            description="Streamline medical billing and coding workflows",
-            card_id="doctor_billing"
+            title="Archived Records",
+            description="Access and review previously closed patient records and case histories",
+            card_id="doctor_archived_records"
         )
-        if st.button("OPEN", key="doctor_billing_btn", use_container_width=True):
-            st.session_state.page = "feature_billing_assistant"
+        if st.button("OPEN", key="doctor_archived_records_btn", use_container_width=True):
+            st.session_state.page = "feature_archived_records"
+            st.rerun()
+
+    with col3:
+        feature_card_html(
+            icon="",
+            title="Complication Risk Alert",
+            description="Monitor patients flagged for potential complications and elevated risk factors",
+            card_id="doctor_complication_risk"
+        )
+        if st.button("OPEN", key="doctor_complication_risk_btn", use_container_width=True):
+            st.session_state.page = "feature_complication_risk"
             st.rerun()
 
     footer()
