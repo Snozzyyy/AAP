@@ -598,38 +598,6 @@ GLOBAL_CSS = """
         }
     }
 
-    /* ─── Selectbox / Dropdown Styles ───────────────────────────────── */
-
-    div[data-baseweb="select"] {
-        background-color: #111111 !important;
-        border: 1px solid #2D2D2D !important;
-        border-radius: 8px !important;
-    }
-
-    div[data-baseweb="select"] * {
-        color: #FFFFFF !important;
-        background-color: transparent !important;
-    }
-
-    div[data-baseweb="select"] [data-baseweb="icon"] {
-        fill: #FFFFFF !important;
-    }
-
-    div[data-baseweb="popover"], div[data-baseweb="menu"], ul[role="listbox"] {
-        background-color: #111111 !important;
-        border: 1px solid #2D2D2D !important;
-    }
-
-    li[role="option"], div[role="option"] {
-        background-color: #111111 !important;
-        color: #FFFFFF !important;
-    }
-
-    li[role="option"]:hover, div[role="option"]:hover,
-    li[role="option"][aria-selected="true"], div[role="option"][aria-selected="true"] {
-        background-color: #2D2D2D !important;
-        color: #FFFFFF !important;
-    }
 
     /* ─── Chatbot Page Styles ────────────────────────────────────────── */
 

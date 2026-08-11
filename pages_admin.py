@@ -52,7 +52,7 @@ def show_admin_dashboard():
             </div>
             """, unsafe_allow_html=True)
 
-            col_spacer, col_approve, col_reject = st.columns([4, 1.5, 1.5])
+            col_spacer, col_approve, col_reject = st.columns([5, 1, 1])
             with col_approve:
                 if st.button("APPROVE", key=f"approve_{doc['id']}", use_container_width=True):
                     update_user_status(doc["id"], "active")

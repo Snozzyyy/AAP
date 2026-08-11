@@ -63,7 +63,7 @@ def show_doctor_dashboard():
     st.markdown('<p style="color:#A0A0A0;font-size:14px;margin-top:0;">What would you like to do today?</p>', unsafe_allow_html=True)
     st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns(3, gap="medium")
+    col1, col2 = st.columns(2, gap="medium")
 
     with col1:
         feature_card_html(
@@ -86,6 +86,8 @@ def show_doctor_dashboard():
         if st.button("OPEN", key="doctor_archived_records_btn", use_container_width=True):
             st.session_state.page = "feature_archived_records"
             st.rerun()
+
+    col3, col4 = st.columns(2, gap="medium")
 
     with col3:
         feature_card_html(
