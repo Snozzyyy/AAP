@@ -212,17 +212,24 @@ GLOBAL_CSS = """
         background-color: #FFFFFF !important;
     }
 
-    [data-baseweb="popover"] div,
-    [data-baseweb="popover"] li,
-    [data-baseweb="popover"] span,
-    [data-baseweb="menu"] div,
-    [data-baseweb="menu"] li,
-    [data-baseweb="list"] li {
+    [data-baseweb="popover"],
+    [data-baseweb="popover"] *,
+    [data-baseweb="menu"],
+    [data-baseweb="menu"] *,
+    [data-baseweb="list"],
+    [data-baseweb="list"] * {
         color: #000000 !important;
         background-color: #FFFFFF !important;
     }
 
-    [data-baseweb="menu"] [role="option"]:hover {
+    [data-baseweb="menu"] [role="option"][aria-selected="true"],
+    [data-baseweb="menu"] [role="option"][aria-selected="true"] * {
+        background-color: #E8E8E8 !important;
+        color: #000000 !important;
+    }
+
+    [data-baseweb="menu"] [role="option"]:hover,
+    [data-baseweb="menu"] [role="option"]:hover * {
         background-color: #F0F0F0 !important;
         color: #000000 !important;
     }
