@@ -4,6 +4,7 @@ from pages_auth import show_login, show_signup
 from pages_dashboards import show_patient_dashboard, show_doctor_dashboard
 from pages_admin import show_admin_dashboard
 from pages_features import show_feature_page, FEATURE_ROUTES
+from patient_info import show as show_patient_info
 
 st.set_page_config(
     page_title="Healthify",
@@ -21,7 +22,7 @@ if "user" not in st.session_state:
 
 protected_pages = {
     "patient_dashboard", "doctor_dashboard", "admin_dashboard",
-    "feature_ai_symptom_patient"
+    "feature_ai_symptom_patient", "patient_info"
 } | set(FEATURE_ROUTES.keys())
 
 if st.session_state.user is None and st.session_state.page in protected_pages:
@@ -39,6 +40,8 @@ elif page == "doctor_dashboard":
     show_doctor_dashboard()
 elif page == "admin_dashboard":
     show_admin_dashboard()
+elif page == "patient_info":
+    show_patient_info()
 elif page == "feature_ai_symptom_patient":
     from pages_chatbot import show_ai_symptom_diagnoser
     show_ai_symptom_diagnoser()

@@ -2,7 +2,7 @@ from turtle import st
 
 import google.generativeai as genai
 
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+genai.configure(api_key=st.secretsg["GEMINI_API_KEY"])
 
 model = genai.GenerativeModel("gemini-2.5-flash")
 
@@ -10,7 +10,7 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 def generate_notification(patient, appointment, prediction):
 
     prompt = f"""
-You are helping a healthcare clinic, called Lamine Yamal Clinic.
+You are helping a healthcare clinic, called Healthify.
 
 Generate a professional SMS reminder.
 

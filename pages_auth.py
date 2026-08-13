@@ -133,27 +133,15 @@ def show_signup():
                     "Gender",
                     ["Male", "Female"]
                 )
-                st.write("Please indicate if u have any of the following conditions:")
-
-                hypertension = st.checkbox(
-                    "Hypertension"
-                )
-                diabetes = st.checkbox(
-                    "Diabetes"
-                )
-                handicap = st.checkbox(
-                    "Handicap"
-                )
                 phone_number = st.text_input(
                     "Phone Number",
                     placeholder="e.g. +65 1234 5678"
                 )
-                age = st.number_input(
-                    "Age",
-                    min_value=0,
-                    max_value=120,
-                    step=1
-                )
+                st.caption("You can add age and health information later from the Patient Info page.")
+                age = 0
+                hypertension = 0
+                diabetes = 0
+                handicap = 0
 
             password = st.text_input("Password", type="password", placeholder="Min. 8 characters")
             confirm_password = st.text_input("Confirm Password", type="password", placeholder="Re-enter password")

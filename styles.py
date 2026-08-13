@@ -25,19 +25,19 @@ GLOBAL_CSS = """
     /* Hide Streamlit defaults */
     #MainMenu {visibility: hidden !important;}
     footer {visibility: hidden !important;}
-    header[data-testid="stHeader"] {visibility: hidden !important; height: 0 !important;}
-    [data-testid="stToolbar"] {display: none !important;}
+    header[data-testid="stHeader"] {visibility: visible !important; height: auto !important;}
+    [data-testid="stToolbar"] {display: flex !important;}
     [data-testid="stDecoration"] {display: none !important;}
     [data-testid="stStatusWidget"] {display: none !important;}
-    [data-testid="manage-app-button"] {display: none !important;}
+    [data-testid="manage-app-button"] {display: inline-flex !important;}
     .viewerBadge_container__r5tak {display: none !important;}
     .styles_viewerBadge__CvC9N {display: none !important;}
     ._profileContainer_gzau3_53 {display: none !important;}
     [data-testid="stActionButton"] {display: none !important;}
-    .stDeployButton {display: none !important;}
+    .stDeployButton {display: inline-flex !important;}
     [class*="viewerBadge"] {display: none !important;}
-    [data-testid="baseButton-header"] {display: none !important;}
-    button[kind="header"] {display: none !important;}
+    [data-testid="baseButton-header"] {display: inline-flex !important;}
+    button[kind="header"] {display: inline-flex !important;}
     [data-testid="stSource"] {display: none !important;}
     .reportview-container .main .block-container iframe {display: none !important;}
 

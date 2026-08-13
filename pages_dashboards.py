@@ -13,6 +13,9 @@ def show_patient_dashboard():
     user = st.session_state.user
     nav_bar(user_name=user["name"])
 
+    if st.session_state.get("appointment_success_message"):
+        st.toast(st.session_state.pop("appointment_success_message"), icon="✅")
+
     col_main, col_logout = st.columns([5, 1])
     with col_logout:
         if st.button("LOGOUT", key="patient_logout"):
@@ -44,6 +47,20 @@ def show_patient_dashboard():
         )
         if st.button("OPEN", key="patient_appointment_btn", use_container_width=True):
             st.session_state.page = "feature_book_appointment"
+            st.rerun()
+
+    st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+
+    col3, col4 = st.columns(2, gap="medium")
+    with col3:
+        feature_card_html(
+            icon="",
+            title="Patient Info",
+            description="Update your age, gender, and health details whenever you want",
+            card_id="patient_info"
+        )
+        if st.button("OPEN", key="patient_info_btn", use_container_width=True):
+            st.session_state.page = "patient_info"
             st.rerun()
 
     footer()

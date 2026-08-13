@@ -224,6 +224,30 @@ def delete_patient(patient_id: int):
     conn.commit()
     conn.close()
 
+
+def update_patient_profile(user_id: int, age: int, gender: str, hypertension: bool, diabetes: bool, handicap: bool):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        UPDATE patients
+        SET age = ?, gender = ?, hypertension = ?, diabetes = ?, handicap = ?
+        WHERE user_id = ?
+        """,
+        (int(age), gender, int(bool(hypertension)), int(bool(diabetes)), int(bool(handicap)), user_id)
+    )
+    cursor.execute(
+        """
+        UPDATE users
+        SET age = ?
+        WHERE id = ?
+        """,
+        (int(age), user_id)
+    )
+    conn.commit()
+    conn.close()
+
+
 def get_patient_by_id(patient_id):
 
     conn = get_connection()
