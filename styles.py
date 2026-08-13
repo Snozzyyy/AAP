@@ -25,147 +25,28 @@ GLOBAL_CSS = """
     /* Hide Streamlit defaults */
     #MainMenu {visibility: hidden !important;}
     footer {visibility: hidden !important;}
-    header[data-testid="stHeader"] {visibility: visible !important; height: auto !important;}
-    [data-testid="stToolbar"] {display: flex !important;}
+    header[data-testid="stHeader"] {visibility: hidden !important; height: 0 !important;}
+    [data-testid="stToolbar"] {display: none !important;}
     [data-testid="stDecoration"] {display: none !important;}
     [data-testid="stStatusWidget"] {display: none !important;}
-    [data-testid="manage-app-button"] {display: inline-flex !important;}
+    [data-testid="manage-app-button"] {display: none !important;}
     .viewerBadge_container__r5tak {display: none !important;}
     .styles_viewerBadge__CvC9N {display: none !important;}
     ._profileContainer_gzau3_53 {display: none !important;}
     [data-testid="stActionButton"] {display: none !important;}
-    .stDeployButton {display: inline-flex !important;}
+    .stDeployButton {display: none !important;}
     [class*="viewerBadge"] {display: none !important;}
-    [data-testid="baseButton-header"] {display: inline-flex !important;}
-    button[kind="header"] {display: inline-flex !important;}
+    [data-testid="baseButton-header"] {display: none !important;}
+    button[kind="header"] {display: none !important;}
     [data-testid="stSource"] {display: none !important;}
     .reportview-container .main .block-container iframe {display: none !important;}
 
     /* Block container */
     .block-container {
         max-width: 900px !important;
-        padding-top: 24px !important;
+        padding-top: 48px !important;
         padding-left: 24px !important;
         padding-right: 24px !important;
-    }
-
-    /* Auth page */
-    .auth-shell {
-        min-height: auto;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 32px;
-        padding: 8px 0 24px;
-    }
-
-    .auth-hero {
-        background:
-            radial-gradient(circle at top left, rgba(255,255,255,0.08), transparent 38%),
-            linear-gradient(180deg, #121212 0%, #0A0A0A 100%);
-        border: 1px solid #2D2D2D;
-        border-radius: 24px;
-        padding: 36px;
-        min-height: 520px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .auth-hero::after {
-        content: '';
-        position: absolute;
-        inset: auto -20% -25% auto;
-        width: 260px;
-        height: 260px;
-        background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
-        pointer-events: none;
-    }
-
-    .auth-hero .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        width: fit-content;
-        padding: 6px 12px;
-        border-radius: 999px;
-        border: 1px solid #2D2D2D;
-        color: #A0A0A0;
-        background: rgba(255,255,255,0.03);
-        font-size: 12px;
-        font-weight: 500;
-        letter-spacing: 0.3px;
-        margin-bottom: 16px;
-    }
-
-    .auth-hero h1 {
-        font-size: 42px;
-        line-height: 1;
-        margin: 0 0 14px 0;
-        letter-spacing: -1.5px;
-    }
-
-    .auth-hero p {
-        color: #C7C7C7 !important;
-        font-size: 15px;
-        line-height: 1.7;
-        max-width: 420px;
-    }
-
-    .auth-points {
-        display: grid;
-        gap: 12px;
-        margin-top: 28px;
-    }
-
-    .auth-point {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 14px;
-        border-radius: 14px;
-        border: 1px solid rgba(45,45,45,0.9);
-        background: rgba(255,255,255,0.025);
-    }
-
-    .auth-point .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 999px;
-        background: #FFFFFF;
-        box-shadow: 0 0 0 4px rgba(255,255,255,0.08);
-        flex: 0 0 auto;
-    }
-
-    .auth-point span {
-        color: #E6E6E6 !important;
-        font-size: 13px;
-        line-height: 1.4;
-    }
-
-    .auth-card {
-        background:
-            linear-gradient(180deg, rgba(17,17,17,0.98), rgba(10,10,10,0.98));
-        border: 1px solid #2D2D2D;
-        border-radius: 24px;
-        padding: 36px;
-        max-width: 460px;
-        width: 100%;
-        margin: 0 auto;
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .auth-card::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, rgba(255,255,255,0.04), transparent 35%);
-        pointer-events: none;
     }
 
     /* Typography */
@@ -247,28 +128,17 @@ GLOBAL_CSS = """
 
     .auth-card .tagline {
         text-align: center;
-        color: #A0A0A0 !important;
+        color: #A0A0A0;
         font-size: 13px;
         font-weight: 400;
-        margin-bottom: 28px;
+        margin-bottom: 32px;
     }
 
     .auth-card .form-heading {
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 600;
         color: #FFFFFF;
-        margin-bottom: 18px;
-        letter-spacing: -0.2px;
-        text-align: center !important;
-        font-weight: bold;
-    }
-
-    .auth-helper-text {
-        text-align: center;
-        color: #A0A0A0 !important;
-        font-size: 14px;
-        line-height: 1.5;
-        margin: 0;
+        margin-bottom: 16px;
     }
 
     /* Form inputs */
@@ -280,21 +150,20 @@ GLOBAL_CSS = """
     }
 
     .stTextInput > div > div > input {
-        background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
         color: #000000 !important;
         caret-color: #000000 !important;
-        border: 1px solid #3D3D3D !important;
-        border-radius: 14px !important;
-        height: 46px !important;
+        border: 1px solid #2D2D2D !important;
+        border-radius: 8px !important;
+        height: 44px !important;
         font-size: 14px !important;
         font-family: 'Inter', sans-serif !important;
         transition: all 0.2s ease !important;
-        box-shadow: 0 1px 0 rgba(255,255,255,0.03) inset !important;
     }
 
     .stTextInput > div > div > input:focus {
         border-color: #FFFFFF !important;
-        box-shadow: 0 0 0 3px rgba(255,255,255,0.14) !important;
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.2) !important;
     }
 
     .stTextInput > div > div > input::placeholder {
@@ -304,67 +173,22 @@ GLOBAL_CSS = """
 
     .stTextInput label {
         color: #FFFFFF !important;
-        font-size: 12px !important;
+        font-size: 13px !important;
         font-weight: 500 !important;
-        margin-bottom: 6px !important;
-    }
-
-    .stNumberInput label,
-    .stCheckbox label {
-        color: #FFFFFF !important;
-        font-size: 12px !important;
-        font-weight: 500 !important;
-        margin-bottom: 6px !important;
-    }
-
-    .stNumberInput > div > div > input {
-        background: #FFFFFF !important;
-        color: #000000 !important;
-        border: 1px solid #3D3D3D !important;
-        border-radius: 14px !important;
-        height: 46px !important;
-        font-size: 14px !important;
     }
 
     /* Select box */
     .stSelectbox label {
         color: #FFFFFF !important;
-        font-size: 12px !important;
+        font-size: 13px !important;
         font-weight: 500 !important;
-        margin-bottom: 6px !important;
     }
 
     .stSelectbox > div > div {
         background-color: #FFFFFF !important;
         color: #000000 !important;
-        border: 1px solid #3D3D3D !important;
-        border-radius: 14px !important;
-        min-height: 46px !important;
-    }
-
-    .stSelectbox [data-baseweb="popover"],
-    .stSelectbox [data-baseweb="menu"] {
-        background: #FFFFFF !important;
-    }
-
-    .stSelectbox [data-baseweb="menu"] * {
-        color: #111111 !important;
-    }
-
-    .stSelectbox [role="option"],
-    .stSelectbox [data-baseweb="menu"] li,
-    .stSelectbox [data-baseweb="menu"] span,
-    .stSelectbox [data-baseweb="menu"] p,
-    .stSelectbox [data-baseweb="menu"] div {
-        color: #000000 !important;
-        background: #FFFFFF !important;
-    }
-
-    .stSelectbox [role="option"]:hover,
-    .stSelectbox [role="option"][aria-selected="true"],
-    .stSelectbox [data-baseweb="menu"] li:hover {
-        background: #F2F2F2 !important;
-        color: #000000 !important;
+        border: 1px solid #2D2D2D !important;
+        border-radius: 8px !important;
     }
 
     .stSelectbox [data-baseweb="select"] span {
@@ -383,27 +207,40 @@ GLOBAL_CSS = """
         fill: #000000 !important;
     }
 
-    .stCheckbox [data-baseweb="checkbox"] {
-        border-radius: 6px;
+    /* Dropdown menu popover */
+    [data-baseweb="popover"] {
+        background-color: #FFFFFF !important;
     }
 
-    .stCheckbox [data-baseweb="checkbox"] > div {
-        border-color: #3D3D3D !important;
-        background: #FFFFFF !important;
+    [data-baseweb="popover"],
+    [data-baseweb="popover"] *,
+    [data-baseweb="menu"],
+    [data-baseweb="menu"] *,
+    [data-baseweb="list"],
+    [data-baseweb="list"] * {
+        color: #000000 !important;
+        background-color: #FFFFFF !important;
     }
 
-    .stCheckbox [aria-checked="true"] > div {
-        background: #000000 !important;
-        border-color: #FFFFFF !important;
+    [data-baseweb="menu"] [role="option"][aria-selected="true"],
+    [data-baseweb="menu"] [role="option"][aria-selected="true"] * {
+        background-color: #E8E8E8 !important;
+        color: #000000 !important;
+    }
+
+    [data-baseweb="menu"] [role="option"]:hover,
+    [data-baseweb="menu"] [role="option"]:hover * {
+        background-color: #F0F0F0 !important;
+        color: #000000 !important;
     }
 
     /* Buttons - Primary (black bg, white text, grey border) */
     .stButton > button {
-        background: linear-gradient(180deg, #1A1A1A 0%, #000000 100%) !important;
+        background-color: #000000 !important;
         color: #FFFFFF !important;
-        border: 1px solid #3A3A3A !important;
-        border-radius: 14px !important;
-        height: 48px !important;
+        border: 1px solid #2D2D2D !important;
+        border-radius: 8px !important;
+        height: 44px !important;
         font-size: 14px !important;
         font-weight: 600 !important;
         text-transform: uppercase !important;
@@ -414,11 +251,10 @@ GLOBAL_CSS = """
     }
 
     .stButton > button:hover {
-        background: linear-gradient(180deg, #232323 0%, #0B0B0B 100%) !important;
+        background-color: #111111 !important;
         color: #FFFFFF !important;
-        border-color: #4A4A4A !important;
+        border-color: #3D3D3D !important;
         transform: translateY(-1px);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.28);
     }
 
     .stButton > button:active {
@@ -428,17 +264,6 @@ GLOBAL_CSS = """
     .stButton > button:disabled {
         opacity: 0.6 !important;
         cursor: not-allowed !important;
-    }
-
-    .auth-card .stButton > button {
-        width: 100%;
-    }
-
-    .auth-card .stTextInput,
-    .auth-card .stSelectbox,
-    .auth-card .stNumberInput,
-    .auth-card .stCheckbox {
-        margin-bottom: 8px;
     }
 
     /* Danger button override */
@@ -701,13 +526,6 @@ GLOBAL_CSS = """
         font-size: 13px;
     }
 
-    .auth-footer-note {
-        text-align: center;
-        color: #8F8F8F !important;
-        font-size: 12px;
-        margin-top: 14px;
-    }
-
     /* Footer */
     .app-footer {
         text-align: center;
@@ -805,29 +623,173 @@ GLOBAL_CSS = """
             padding-left: 16px !important;
             padding-right: 16px !important;
         }
-
-        .auth-shell {
-            min-height: auto;
-            display: block;
-            padding-top: 8px;
-        }
-
-        .auth-hero {
-            min-height: auto;
-            padding: 28px 24px;
-            margin-bottom: 16px;
-            border-radius: 20px;
-        }
-
-        .auth-hero h1 {
-            font-size: 34px;
-        }
-
-        .auth-card {
-            padding: 28px 22px;
-            border-radius: 20px;
-        }
     }
+
+
+    /* ─── Chatbot Page Styles ────────────────────────────────────────── */
+
+    [data-testid="stChatMessage"] {
+        background: #111111 !important;
+        border: 1px solid #2D2D2D !important;
+        border-radius: 12px !important;
+        padding: 16px 20px !important;
+        margin-bottom: 12px !important;
+    }
+
+    [data-testid="stChatMessage"] p,
+    [data-testid="stChatMessage"] span,
+    [data-testid="stChatMessage"] li,
+    [data-testid="stChatMessage"] h1,
+    [data-testid="stChatMessage"] h2,
+    [data-testid="stChatMessage"] h3 {
+        color: #FFFFFF !important;
+    }
+
+    /* Chat Avatar Styling - clean badge labels */
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"],
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
+        border-radius: 6px !important;
+        width: auto !important;
+        height: auto !important;
+        padding: 4px 10px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+    }
+
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] span,
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] span {
+        font-size: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        display: none !important;
+    }
+
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"]::after {
+        content: "Patient";
+        font-family: 'Inter', sans-serif !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        color: #FFFFFF !important;
+        white-space: nowrap;
+    }
+
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"]::after {
+        content: "AI Assistant";
+        font-family: 'Inter', sans-serif !important;
+        font-size: 11px !important;
+        font-weight: 600 !important;
+        color: #FFFFFF !important;
+        white-space: nowrap;
+    }
+
+
+    /* Streamlit Standard Chat Input - Dark Minimalist Theme */
+    [data-testid="stChatInput"] {
+        background-color: #000000 !important;
+        padding-top: 8px !important;
+        padding-bottom: 16px !important;
+        border: none !important;
+    }
+
+    [data-testid="stChatInput"] > div {
+        background-color: #111111 !important;
+        border: 1px solid #2D2D2D !important;
+        border-radius: 12px !important;
+    }
+
+    [data-testid="stChatInput"] textarea {
+        background-color: transparent !important;
+        color: #FFFFFF !important;
+        caret-color: #FFFFFF !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 14px !important;
+        border: none !important;
+    }
+
+    [data-testid="stChatInput"] textarea::placeholder {
+        color: #777777 !important;
+    }
+
+    [data-testid="stChatInput"] button {
+        background-color: #2D2D2D !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        border-radius: 8px !important;
+    }
+
+    [data-testid="stChatInput"] button:hover {
+        background-color: #444444 !important;
+    }
+
+    [data-testid="stChatInput"] button svg {
+        fill: #FFFFFF !important;
+        color: #FFFFFF !important;
+    }
+
+    /* Expander Styling */
+    [data-testid="stExpander"] {
+        background: #111111 !important;
+        border: 1px solid #2D2D2D !important;
+        border-radius: 8px !important;
+    }
+
+    [data-testid="stExpander"] details {
+        background: #111111 !important;
+        border: none !important;
+    }
+
+    [data-testid="stExpander"] summary span {
+        color: #FFFFFF !important;
+        font-family: 'Inter', sans-serif !important;
+    }
+
+    /* Hide icon text bleeding into expander titles */
+    [data-testid="stExpander"] summary span[data-testid="stIconMaterial"],
+    [data-testid="stExpander"] summary .material-symbols-outlined {
+        font-size: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+        display: none !important;
+    }
+
+    /* Progress Bar - track is dark, only filled portion is white */
+    [data-testid="stProgress"] > div {
+        background-color: transparent !important;
+        border-radius: 4px !important;
+    }
+
+    [data-testid="stProgress"] > div > div {
+        background-color: #2D2D2D !important;
+        border-radius: 4px !important;
+    }
+
+    [data-testid="stProgress"] > div > div > div {
+        background-color: #FFFFFF !important;
+        border-radius: 4px !important;
+    }
+
+    .stProgress > div > div > div {
+        background-color: #FFFFFF !important;
+    }
+
+    .stProgress p {
+        color: #A0A0A0 !important;
+        font-size: 12px !important;
+    }
+
+    .stSpinner > div > span {
+        color: #A0A0A0 !important;
+    }
+
+    .stCaption, [data-testid="stCaptionContainer"] {
+        color: #A0A0A0 !important;
+    }
+
 </style>
 """
 
