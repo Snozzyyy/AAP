@@ -74,10 +74,12 @@ def show_admin_dashboard():
         ac_col1, ac_col2 = st.columns(2, gap="medium")
         with ac_col1:
             new_name = st.text_input("Full Name", placeholder="Jane Smith", key="admin_new_name")
+            new_age = st.number_input("Age", min_value=0, max_value=120, step=1, key="admin_new_age")
             new_password = st.text_input("Password", type="password", placeholder="Min. 8 characters", key="admin_new_password")
         with ac_col2:
             new_email = st.text_input("Email", placeholder="you@example.com", key="admin_new_email")
             new_role = st.selectbox("Role", ["Patient", "Doctor"], key="admin_new_role")
+            new_phone_number = st.text_input("Phone Number", placeholder="e.g. +1 555 123 4567", key="admin_new_phone_number")
 
         create_submitted = st.form_submit_button("CREATE ACCOUNT", use_container_width=True)
 
@@ -91,12 +93,16 @@ def show_admin_dashboard():
             errors.append("Please enter a valid email address.")
         if len(new_password) < 8:
             errors.append("Password must be at least 8 characters.")
+        if new_role.lower() == "patient" and not new_phone_number.strip():
+            errors.append("Phone number is required for patient accounts.")
+        if new_role.lower() == "patient" and not new_age.strip():
+            errors.append("Age is required for patient accounts.")
 
         if errors:
             for e in errors:
                 alert(e, "error")
         else:
-            success, message = create_user(new_name.strip(), new_email.strip(), new_password, new_role.lower())
+            success, message = create_user(new_name.strip(), new_email.strip(), new_password, new_role.lower(), int(new_age), new_phone_number)
             if success:
                 toast("Account created successfully.", "success")
                 st.rerun()
