@@ -7,37 +7,20 @@ def show_login():
     inject_css()
 
     st.markdown('<div class="auth-shell">', unsafe_allow_html=True)
-    col1, col2 = st.columns([1.2, 1], gap="large")
-    with col1:
+    col1, col2, col3 = st.columns([1, 1.4, 1])
+    with col2:
         st.markdown(
             """
-            <div class="auth-hero">
-                <div>
-                    <div class="eyebrow">Your Health, simplified</div>
-                    <h1>One place for patients and providers.</h1>
-                    <p>Healthify keeps registration, appointments, and follow-up actions organized in a clean workflow that ferrans fast and efficient.</p>
-                    <div class="auth-points">
-                        <div class="auth-point"><span class="dot"></span><span>Track patient profiles and appointment history in one system.</span></div>
-                        <div class="auth-point"><span class="dot"></span><span>Separates patient, doctor, and admin access without extra clutter.</span></div>
-                        <div class="auth-point"><span class="dot"></span><span>Move from sign-in to dashboard with fewer clicks and less noise.</span></div>
-                    </div>
-                </div>
-                <div class="auth-footer-note">Secure access for every role.</div>
+            <div class="auth-card">
+                <div class="brand"><h1>Healthify</h1></div>
+                <div class="tagline">Your Health, simplified</div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
-    with col2:
-        st.markdown("""
-        <div class="auth-card">
-            <div class="brand"><h1>Healthify</h1></div>
-            <div class="tagline">Viva Espana!!!!</div>
-        </div>
-        """, unsafe_allow_html=True)
-
         st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
-        st.markdown('<h4 class="form-heading">Sign In</h42>', unsafe_allow_html=True)
+        st.markdown('<p class="form-heading" style="font-size:18px;font-weight:600;">Sign In</p>', unsafe_allow_html=True)
 
         with st.form("login_form", clear_on_submit=False):
             email = st.text_input("Email", placeholder="you@example.com")
@@ -81,42 +64,20 @@ def show_signup():
     inject_css()
 
     st.markdown('<div class="auth-shell">', unsafe_allow_html=True)
-    col1, col2 = st.columns([1.2, 1], gap="large")
-    with col1:
+    col1, col2, col3 = st.columns([1, 1.4, 1])
+    with col2:
         st.markdown(
             """
-            <div class="auth-hero">
-                <div>
-                    <div class="eyebrow">Start here</div>
-                    <h1>Create the right account in seconds.</h1>
-                    <p>Patients can book appointments online and view previous appointment history, while doctors and admins can keep their workflow lighter.</p>
-                    <div class="auth-points">
-                        <div class="auth-point"><span class="dot"></span><span>Patient accounts capture the information needed for reminders and predictions.</span></div>
-                        <div class="auth-point"><span class="dot"></span><span>Doctor and admin accounts stay simple and quick to create.</span></div>
-                        <div class="auth-point"><span class="dot"></span><span>The form adapts to the role you choose, so only relevant fields appear.</span></div>
-                    </div>
-                </div>
-                <div class="auth-footer-note">Built for a clean clinical workflow.</div>
+            <div class="auth-card">
+                <div class="brand"><h1>Healthify</h1></div>
+                <div class="tagline">Create Your Account</div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
-    with col2:
-        st.markdown("""
-        <div class="auth-card">
-            <div class="brand"><h1>Healthify</h1></div>
-            <div class="tagline">Create Your Account</div>
-        </div>
-        """, unsafe_allow_html=True)
-
         st.markdown("<div style='height:32px'></div>", unsafe_allow_html=True)
-        st.markdown('<p class="form-heading">Create Account</p>', unsafe_allow_html=True)
-
-        role = st.selectbox(
-        "Register as:",
-        ["Patient", "Doctor"]
-    ).lower()
+        st.markdown('<p class="form-heading" style="font-size:18px;font-weight:600;">Create Account</p>', unsafe_allow_html=True)
 
         with st.form("signup_form", clear_on_submit=False):
             name = st.text_input("Full Name", placeholder="Jane Smith")
@@ -145,6 +106,7 @@ def show_signup():
 
             password = st.text_input("Password", type="password", placeholder="Min. 8 characters")
             confirm_password = st.text_input("Confirm Password", type="password", placeholder="Re-enter password")
+            role = st.selectbox("Register as:", ["Patient", "Doctor"]).lower()
             submitted = st.form_submit_button("CREATE ACCOUNT", use_container_width=True)
 
         if submitted:
