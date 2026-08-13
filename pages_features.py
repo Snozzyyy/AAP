@@ -1,5 +1,5 @@
 import streamlit as st
-import create_patient, patient_list, book_appointment
+import book_appointment
 from styles import coming_soon_page
 
 
@@ -12,13 +12,6 @@ FEATURE_ROUTES = {
 
 
 def show_feature_page(page_key: str):
-    if page_key == "feature_patient_list":
-        patient_list.show()
-        return
-
-    if page_key == "feature_create_patient":
-        create_patient.show()
-        return
     
     if page_key == "feature_book_appointment":
         book_appointment.show()
