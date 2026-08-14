@@ -4,3 +4,4 @@ numpy
 google-genai
 scikit-learn
 xgboost
+google-generativeai
