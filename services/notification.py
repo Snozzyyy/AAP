@@ -1,10 +1,9 @@
-import streamlit as st 
-
+import streamlit as st
 from google import genai
 
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-
-model = genai.GenerativeModel("gemini-2.5-flash")
+client = genai.Client(
+    api_key=st.secrets["GEMINI_API_KEY"]
+)
 
 
 def generate_notification(patient, appointment, prediction):
@@ -20,16 +19,20 @@ Appointment Date: {appointment['date']}
 Appointment Time: {appointment['time']}
 Predicted No-show Risk: {prediction['risk']}
 
-Rules
+Rules:
 - Maximum 160 words.
 - Friendly and encouraging.
 - DO NOT imply that the patient is going to miss the appointment, but rather that they should attend.
 - If HIGH risk:
-  Encourage the patient to attend or reschedule if necessary, using a persuasive tone. The Clinic's phone number is +65 1234 5678.
+  Encourage the patient to attend or reschedule if necessary, using a persuasive tone.
+  The Clinic's phone number is +65 1234 5678.
 - If LOW risk:
   Simply remind them of the appointment.
 - Always end with "Vamos!"
 """
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt
+    )
     return response.text.strip()

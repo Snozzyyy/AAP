@@ -82,6 +82,11 @@ def show_signup():
         with st.form("signup_form", clear_on_submit=False):
             name = st.text_input("Full Name", placeholder="Jane Smith")
             email = st.text_input("Email", placeholder="you@example.com")
+            role = st.selectbox(
+                "Register as:",
+                ["Patient", "Doctor"],
+                key="signup_role"
+            ).lower()
             age = 0
             phone_number = ""
             gender = None
@@ -92,7 +97,8 @@ def show_signup():
             if role == "patient":
                 gender = st.selectbox(
                     "Gender",
-                    ["Male", "Female"]
+                    ["Male", "Female"],
+                    key="signup_gender"
                 )
                 phone_number = st.text_input(
                     "Phone Number",
@@ -106,7 +112,6 @@ def show_signup():
 
             password = st.text_input("Password", type="password", placeholder="Min. 8 characters")
             confirm_password = st.text_input("Confirm Password", type="password", placeholder="Re-enter password")
-            role = st.selectbox("Register as:", ["Patient", "Doctor"]).lower()
             submitted = st.form_submit_button("CREATE ACCOUNT", use_container_width=True)
 
         if submitted:
