@@ -67,33 +67,21 @@ def show():
             padding: 0 !important;
             margin-bottom: 10px !important;
         }
-
-        button[kind="primary"], .stButton > button {
-            background: #D9D9D9 !important;
-            color: #111111 !important;
-            border: 1px solid #D9D9D9 !important;
-            border-radius: 12px !important;
-            font-weight: 700 !important;
-            padding: 0.7rem 1.1rem !important;
-            width: auto !important;
-            min-width: 180px !important;
-            box-shadow: none !important;
-        }
-
-        button[kind="primary"]:hover, .stButton > button:hover {
-            background: #F0F0F0 !important;
-            border-color: #F0F0F0 !important;
-            color: #111111 !important;
-        }
-
-        button[kind="primary"]:focus, .stButton > button:focus {
-            box-shadow: none !important;
-            outline: none !important;
-        }
         </style>
         """,
         unsafe_allow_html=True,
     )
+
+    col_back, col_spacer, col_logout = st.columns([1, 3, 1])
+    with col_back:
+        if st.button("< BACK", key="book_back_btn"):
+            st.session_state.page = "patient_dashboard"
+            st.rerun()
+    with col_logout:
+        if st.button("LOGOUT", key="book_logout_btn"):
+            st.session_state.user = None
+            st.session_state.page = "login"
+            st.rerun()
 
     st.markdown(
         """
@@ -165,17 +153,11 @@ def show():
             placeholder="e.g. 85052285 or +65 8505 2285"
         )
 
-    col_back, col_submit = st.columns([1, 2])
-    with col_back:
-        if st.button("< Back to Dashboard", key="book_back_to_dashboard"):
-            st.session_state.page = "patient_dashboard"
-            st.rerun()
-
-    with col_submit:
-        if st.button("Confirm Appointment"):
-            if not phone_number.strip():
-                st.error("Please provide a valid phone number before confirming the appointment.")
-                return
+    st.markdown("<div style='height: 16px'></div>", unsafe_allow_html=True)
+    if st.button("CONFIRM APPOINTMENT", key="confirm_appointment_btn", use_container_width=True):
+        if not phone_number.strip():
+            st.error("Please provide a valid phone number before confirming the appointment.")
+            return
 
             appointment = {
                 "patient_id": patient["id"],

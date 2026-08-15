@@ -31,17 +31,21 @@ def show():
             font-size: 14px;
             margin: 0;
         }
-        .stButton > button {
-            background: #FFFFFF !important;
-            color: #000000 !important;
-            border: 1px solid #FFFFFF !important;
-            border-radius: 12px !important;
-            font-weight: 600 !important;
-        }
         </style>
         """,
         unsafe_allow_html=True,
     )
+
+    col_back, col_spacer, col_logout = st.columns([1, 3, 1])
+    with col_back:
+        if st.button("< BACK", key="patient_info_back_btn"):
+            st.session_state.page = "patient_dashboard"
+            st.rerun()
+    with col_logout:
+        if st.button("LOGOUT", key="patient_info_logout_btn"):
+            st.session_state.user = None
+            st.session_state.page = "login"
+            st.rerun()
 
     st.markdown(
         """
@@ -58,9 +62,6 @@ def show():
         patient = database.get_patient_by_id(user["id"])
     if patient is None:
         st.error("Patient profile not found.")
-        if st.button("Back to Dashboard"):
-            st.session_state.page = "patient_dashboard"
-            st.rerun()
         footer()
         return
 
@@ -96,7 +97,7 @@ def show():
             value=bool(patient.get("handicap", 0)),
         )
 
-        submitted = st.form_submit_button("Save Patient Information", use_container_width=True)
+        submitted = st.form_submit_button("SAVE PATIENT INFORMATION", use_container_width=True)
 
     if submitted:
         database.update_patient_profile(
@@ -110,11 +111,5 @@ def show():
         st.success("Patient information saved successfully.")
         st.session_state.page = "patient_dashboard"
         st.rerun()
-
-    col1, col2, col3 = st.columns([1, 1, 1])
-    with col2:
-        if st.button("Back to Dashboard", use_container_width=True):
-            st.session_state.page = "patient_dashboard"
-            st.rerun()
 
     footer()

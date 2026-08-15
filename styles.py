@@ -2,7 +2,7 @@ import streamlit as st
 
 GLOBAL_CSS = """
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
     /* Global Reset */
     html, body, .stApp, .main, .block-container,
@@ -50,8 +50,12 @@ GLOBAL_CSS = """
     }
 
     /* Typography */
-    h1, h2, h3, h4, h5, h6, p, label, div {
+    h1, h2, h3, h4, h5, h6, label {
         color: #FFFFFF !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    }
+
+    p, span, .stMarkdown {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
     }
 
@@ -149,24 +153,29 @@ GLOBAL_CSS = """
         box-shadow: none !important;
     }
 
-    .stTextInput > div > div > input {
+    .stTextInput [data-baseweb="input"],
+    .stTextInput [data-baseweb="input"] > div,
+    div[data-testid="stTextInput"] [data-baseweb="input"],
+    div[data-testid="stTextInput"] [data-baseweb="input"] > div {
         background-color: #FFFFFF !important;
-        color: #000000 !important;
-        caret-color: #000000 !important;
         border: 1px solid #2D2D2D !important;
         border-radius: 8px !important;
-        height: 44px !important;
+    }
+
+    .stTextInput [data-baseweb="input"] input,
+    div[data-testid="stTextInput"] input {
+        background-color: transparent !important;
+        color: #000000 !important;
+        caret-color: #000000 !important;
+        border: none !important;
+        box-shadow: none !important;
         font-size: 14px !important;
         font-family: 'Inter', sans-serif !important;
-        transition: all 0.2s ease !important;
+        height: 42px !important;
     }
 
-    .stTextInput > div > div > input:focus {
-        border-color: #FFFFFF !important;
-        box-shadow: 0 0 0 2px rgba(255,255,255,0.2) !important;
-    }
-
-    .stTextInput > div > div > input::placeholder {
+    .stTextInput [data-baseweb="input"] input::placeholder,
+    div[data-testid="stTextInput"] input::placeholder {
         color: #999999 !important;
         font-size: 14px !important;
     }
@@ -177,65 +186,90 @@ GLOBAL_CSS = """
         font-weight: 500 !important;
     }
 
-    /* Select box */
+    /* Password Eye Visibility Toggle Icon */
+    .stTextInput [data-baseweb="input"] button,
+    div[data-testid="stTextInput"] button {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        cursor: pointer !important;
+        padding: 0 10px !important;
+    }
+
+    .material-symbols-outlined,
+    [class*="material-symbols"],
+    [data-testid="stIcon"],
+    .stTextInput button *,
+    .stTextInput button span,
+    div[data-testid="stTextInput"] button *,
+    div[data-testid="stTextInput"] button span {
+        font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-size: 20px !important;
+        line-height: 1 !important;
+        letter-spacing: normal !important;
+        text-transform: none !important;
+        display: inline-block !important;
+        white-space: nowrap !important;
+        word-wrap: normal !important;
+        direction: ltr !important;
+        -webkit-font-feature-settings: 'liga' !important;
+        -webkit-font-smoothing: antialiased !important;
+        font-feature-settings: 'liga' !important;
+        color: #555555 !important;
+    }
+
+    .stTextInput button:hover *,
+    div[data-testid="stTextInput"] button:hover * {
+        color: #000000 !important;
+    }
+
+    /* Selectbox label, control box, and black text */
     .stSelectbox label {
         color: #FFFFFF !important;
         font-size: 13px !important;
         font-weight: 500 !important;
     }
 
-    .stSelectbox > div > div {
+    .stSelectbox [data-baseweb="select"] > div {
         background-color: #FFFFFF !important;
-        color: #000000 !important;
         border: 1px solid #2D2D2D !important;
         border-radius: 8px !important;
     }
 
-    .stSelectbox [data-baseweb="select"] span {
-        color: #000000 !important;
-    }
-
-    .stSelectbox [data-baseweb="select"] div {
-        color: #000000 !important;
-    }
-
-    .stSelectbox [data-baseweb="select"] [data-testid="stMarkdownContainer"] {
-        color: #000000 !important;
-    }
-
-    .stSelectbox svg {
-        fill: #000000 !important;
-    }
-
-    /* Dropdown menu popover */
-    [data-baseweb="popover"] {
-        background-color: #FFFFFF !important;
-    }
-
-    [data-baseweb="popover"],
+    .stSelectbox [data-baseweb="select"] *,
+    .stSelectbox [data-baseweb="select"] div,
+    .stSelectbox [data-baseweb="select"] span,
+    .stSelectbox [data-baseweb="select"] p,
+    .stSelectbox [data-baseweb="select"] input,
+    div[data-baseweb="select"] *,
+    div[data-baseweb="select"] div,
+    div[data-baseweb="select"] span,
+    div[data-baseweb="select"] p,
     [data-baseweb="popover"] *,
-    [data-baseweb="menu"],
+    [data-baseweb="popover"] div,
+    [data-baseweb="popover"] span,
+    [data-baseweb="popover"] p,
+    [data-baseweb="popover"] li,
     [data-baseweb="menu"] *,
-    [data-baseweb="list"],
-    [data-baseweb="list"] * {
+    [data-baseweb="menu"] div,
+    [data-baseweb="menu"] span,
+    [data-baseweb="menu"] li,
+    ul[role="listbox"] *,
+    ul[role="listbox"] li,
+    ul[role="listbox"] div,
+    [data-testid="stSelectboxVirtualDropdown"] *,
+    [data-testid="stSelectboxVirtualDropdown"] div,
+    [data-testid="stSelectboxVirtualDropdown"] span,
+    [data-testid="stSelectboxVirtualDropdown"] p {
         color: #000000 !important;
-        background-color: #FFFFFF !important;
-    }
-
-    [data-baseweb="menu"] [role="option"][aria-selected="true"],
-    [data-baseweb="menu"] [role="option"][aria-selected="true"] * {
-        background-color: #E8E8E8 !important;
-        color: #000000 !important;
-    }
-
-    [data-baseweb="menu"] [role="option"]:hover,
-    [data-baseweb="menu"] [role="option"]:hover * {
-        background-color: #F0F0F0 !important;
-        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
     }
 
     /* Buttons - Primary (black bg, white text, grey border) */
-    .stButton > button {
+    .stButton > button,
+    .stFormSubmitButton > button {
         background-color: #000000 !important;
         color: #FFFFFF !important;
         border: 1px solid #2D2D2D !important;
@@ -248,20 +282,26 @@ GLOBAL_CSS = """
         cursor: pointer !important;
         transition: all 0.2s ease !important;
         font-family: 'Inter', sans-serif !important;
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        padding: 0 12px !important;
     }
 
-    .stButton > button:hover {
+    .stButton > button:hover,
+    .stFormSubmitButton > button:hover {
         background-color: #111111 !important;
         color: #FFFFFF !important;
         border-color: #3D3D3D !important;
         transform: translateY(-1px);
     }
 
-    .stButton > button:active {
+    .stButton > button:active,
+    .stFormSubmitButton > button:active {
         transform: translateY(0px);
     }
 
-    .stButton > button:disabled {
+    .stButton > button:disabled,
+    .stFormSubmitButton > button:disabled {
         opacity: 0.6 !important;
         cursor: not-allowed !important;
     }
@@ -272,8 +312,12 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
     }
 
-    .danger-btn button:hover {
-        background-color: rgba(229,62,62,0.85) !important;
+    .danger-btn button:hover,
+    button[data-testid*="reject"]:hover,
+    button[data-testid*="delete"]:hover,
+    button[data-testid*="yes"]:hover {
+        background-color: #E53E3E !important;
+        border-color: #E53E3E !important;
         color: #FFFFFF !important;
     }
 
@@ -645,51 +689,54 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
     }
 
-    /* Chat Avatar Styling - clean badge labels */
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"],
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
-        background-color: #2D2D2D !important;
-        color: #FFFFFF !important;
-        border-radius: 6px !important;
-        width: auto !important;
-        height: auto !important;
-        padding: 4px 10px !important;
+    /* Chat Avatar Container */
+    [data-testid="stChatMessageAvatar"],
+    [data-testid="stChatMessage"] [data-testid*="chatAvatar"],
+    [data-testid="stChatMessage"] [data-testid*="Avatar"] {
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        overflow: hidden !important;
+        width: 36px !important;
+        min-width: 36px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        border-radius: 8px !important;
+        background-color: #1A1A1A !important;
+        border: 1px solid #2D2D2D !important;
+        font-size: 20px !important;
+        line-height: 1 !important;
+        padding: 0 !important;
+        margin-right: 12px !important;
     }
 
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] span,
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] span {
-        font-size: 0 !important;
-        width: 0 !important;
-        overflow: hidden !important;
-        display: none !important;
+    [data-testid="stChatMessageAvatar"] *,
+    [data-testid="stChatMessage"] [data-testid*="chatAvatar"] * {
+        font-size: 20px !important;
+        line-height: 1 !important;
     }
 
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"]::after {
-        content: "Patient";
-        font-family: 'Inter', sans-serif !important;
-        font-size: 11px !important;
-        font-weight: 600 !important;
-        color: #FFFFFF !important;
-        white-space: nowrap;
+    [data-testid="stChatMessageAvatar"] img,
+    [data-testid="stChatMessage"] [data-testid*="chatAvatar"] img {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 8px !important;
+        object-fit: contain !important;
     }
 
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"]::after {
-        content: "AI Assistant";
-        font-family: 'Inter', sans-serif !important;
-        font-size: 11px !important;
-        font-weight: 600 !important;
-        color: #FFFFFF !important;
-        white-space: nowrap;
+    /* Bottom Fixed Container & Chat Input Bar */
+    [data-testid="stBottom"],
+    [data-testid="stBottom"] > div,
+    [data-testid="stBottomBlockContainer"],
+    div[class*="stBottom"],
+    div[class*="bottom"] {
+        background-color: #000000 !important;
+        background: #000000 !important;
     }
-
 
     /* Streamlit Standard Chat Input - Dark Minimalist Theme */
     [data-testid="stChatInput"] {
         background-color: #000000 !important;
+        background: #000000 !important;
         padding-top: 8px !important;
         padding-bottom: 16px !important;
         border: none !important;
@@ -697,6 +744,7 @@ GLOBAL_CSS = """
 
     [data-testid="stChatInput"] > div {
         background-color: #111111 !important;
+        background: #111111 !important;
         border: 1px solid #2D2D2D !important;
         border-radius: 12px !important;
     }
@@ -704,6 +752,7 @@ GLOBAL_CSS = """
     [data-testid="stChatInput"] textarea {
         background-color: transparent !important;
         color: #FFFFFF !important;
+        -webkit-text-fill-color: #FFFFFF !important;
         caret-color: #FFFFFF !important;
         font-family: 'Inter', sans-serif !important;
         font-size: 14px !important;
