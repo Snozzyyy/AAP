@@ -682,51 +682,83 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
     }
 
-    /* Chat Avatar Styling - clean badge labels */
+    /* Chat Avatar Styling - Real Material Symbols icons */
+    [data-testid="stChatMessageAvatar"],
+    [data-testid="stChatMessage"] [data-testid*="chatAvatar"],
     [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"],
     [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
-        background-color: #2D2D2D !important;
-        color: #FFFFFF !important;
-        border-radius: 6px !important;
-        width: auto !important;
-        height: auto !important;
-        padding: 4px 10px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        overflow: hidden !important;
+        width: 36px !important;
+        min-width: 36px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        border-radius: 8px !important;
+        background-color: #1A1A1A !important;
+        border: 1px solid #2D2D2D !important;
+        padding: 0 !important;
+        margin-right: 12px !important;
+        overflow: visible !important;
     }
 
+    [data-testid="stChatMessage"] [data-testid*="chatAvatar"] *,
+    [data-testid="stChatMessage"] [data-testid*="chatAvatar"] span,
     [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] span,
     [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] span {
-        font-size: 0 !important;
-        width: 0 !important;
-        overflow: hidden !important;
-        display: none !important;
+        font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-size: 20px !important;
+        line-height: 1 !important;
+        letter-spacing: normal !important;
+        text-transform: none !important;
+        display: inline-block !important;
+        white-space: nowrap !important;
+        word-wrap: normal !important;
+        direction: ltr !important;
+        -webkit-font-feature-settings: 'liga' !important;
+        -webkit-font-smoothing: antialiased !important;
+        font-feature-settings: 'liga' !important;
+        visibility: visible !important;
     }
 
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"]::after {
-        content: "Patient";
-        font-family: 'Inter', sans-serif !important;
-        font-size: 11px !important;
-        font-weight: 600 !important;
-        color: #FFFFFF !important;
-        white-space: nowrap;
+    /* Assistant Robot Icon */
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
+        background-color: #221C11 !important;
+        border-color: #E28743 !important;
     }
 
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"]::after {
-        content: "AI Assistant";
-        font-family: 'Inter', sans-serif !important;
-        font-size: 11px !important;
-        font-weight: 600 !important;
-        color: #FFFFFF !important;
-        white-space: nowrap;
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] *,
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] span {
+        color: #E28743 !important;
     }
 
+    /* User Human Face Icon */
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
+        background-color: #111A26 !important;
+        border-color: #4A90E2 !important;
+    }
+
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] *,
+    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] span {
+        color: #4A90E2 !important;
+    }
+
+    /* Bottom Fixed Container & Chat Input Bar */
+    [data-testid="stBottom"],
+    [data-testid="stBottom"] > div,
+    [data-testid="stBottomBlockContainer"],
+    div[class*="stBottom"],
+    div[class*="bottom"] {
+        background-color: #000000 !important;
+        background: #000000 !important;
+    }
 
     /* Streamlit Standard Chat Input - Dark Minimalist Theme */
     [data-testid="stChatInput"] {
         background-color: #000000 !important;
+        background: #000000 !important;
         padding-top: 8px !important;
         padding-bottom: 16px !important;
         border: none !important;
@@ -734,6 +766,7 @@ GLOBAL_CSS = """
 
     [data-testid="stChatInput"] > div {
         background-color: #111111 !important;
+        background: #111111 !important;
         border: 1px solid #2D2D2D !important;
         border-radius: 12px !important;
     }
@@ -741,6 +774,7 @@ GLOBAL_CSS = """
     [data-testid="stChatInput"] textarea {
         background-color: transparent !important;
         color: #FFFFFF !important;
+        -webkit-text-fill-color: #FFFFFF !important;
         caret-color: #FFFFFF !important;
         font-family: 'Inter', sans-serif !important;
         font-size: 14px !important;
