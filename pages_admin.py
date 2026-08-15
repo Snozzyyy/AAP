@@ -52,17 +52,15 @@ def show_admin_dashboard():
             </div>
             """, unsafe_allow_html=True)
 
-            col_spacer, col_approve, col_reject = st.columns([5, 1, 1])
+            col_spacer, col_approve, col_reject = st.columns([5, 1, 1], gap="small")
             with col_approve:
                 if st.button("APPROVE", key=f"approve_{doc['id']}", use_container_width=True):
                     update_user_status(doc["id"], "active")
                     st.rerun()
             with col_reject:
-                st.markdown('<div class="danger-btn">', unsafe_allow_html=True)
                 if st.button("REJECT", key=f"reject_{doc['id']}", use_container_width=True):
                     delete_user(doc["id"])
                     st.rerun()
-                st.markdown('</div>', unsafe_allow_html=True)
 
     # Divider
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
@@ -140,8 +138,7 @@ def show_admin_dashboard():
             with row[4]:
                 confirm_key = f"confirm_delete_{u['id']}"
                 if st.session_state.get(confirm_key, False):
-                    st.markdown('<div class="danger-btn">', unsafe_allow_html=True)
-                    col_yes, col_no = st.columns(2)
+                    col_yes, col_no = st.columns(2, gap="small")
                     with col_yes:
                         if st.button("YES", key=f"yes_{u['id']}", use_container_width=True):
                             delete_user(u["id"])
@@ -151,12 +148,9 @@ def show_admin_dashboard():
                         if st.button("NO", key=f"no_{u['id']}", use_container_width=True):
                             st.session_state[confirm_key] = False
                             st.rerun()
-                    st.markdown('</div>', unsafe_allow_html=True)
                 else:
-                    st.markdown('<div class="danger-btn">', unsafe_allow_html=True)
                     if st.button("DELETE", key=f"delete_{u['id']}", use_container_width=True):
                         st.session_state[confirm_key] = True
                         st.rerun()
-                    st.markdown('</div>', unsafe_allow_html=True)
 
     footer()

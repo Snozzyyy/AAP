@@ -309,8 +309,12 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
     }
 
-    .danger-btn button:hover {
-        background-color: rgba(229,62,62,0.85) !important;
+    .danger-btn button:hover,
+    button[data-testid*="reject"]:hover,
+    button[data-testid*="delete"]:hover,
+    button[data-testid*="yes"]:hover {
+        background-color: #E53E3E !important;
+        border-color: #E53E3E !important;
         color: #FFFFFF !important;
     }
 
