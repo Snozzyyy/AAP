@@ -31,11 +31,16 @@ def show_admin_dashboard():
     pending = get_pending_doctors()
     count = len(pending)
 
-    st.markdown(f"""
-    <h2 style="font-size:18px;font-weight:600;margin-bottom:24px;">
-        Pending Approvals <span class="count-pill">{count}</span>
-    </h2>
-    """, unsafe_allow_html=True)
+    col_heading, col_refresh = st.columns([5, 1], gap="small")
+    with col_heading:
+        st.markdown(f"""
+        <h2 style="font-size:18px;font-weight:600;margin-bottom:24px;display:flex;align-items:center;height:44px;margin-top:0;">
+            Pending Approvals <span class="count-pill">{count}</span>
+        </h2>
+        """, unsafe_allow_html=True)
+    with col_refresh:
+        if st.button("REFRESH", key="admin_refresh_btn", use_container_width=True):
+            st.rerun()
 
     if not pending:
         st.markdown('<div class="empty-state">No pending approvals</div>', unsafe_allow_html=True)
