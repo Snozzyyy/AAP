@@ -2,7 +2,7 @@ import streamlit as st
 
 GLOBAL_CSS = """
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
     /* Global Reset */
     html, body, .stApp, .main, .block-container,
@@ -153,24 +153,29 @@ GLOBAL_CSS = """
         box-shadow: none !important;
     }
 
-    .stTextInput > div > div > input {
+    .stTextInput [data-baseweb="input"],
+    .stTextInput [data-baseweb="input"] > div,
+    div[data-testid="stTextInput"] [data-baseweb="input"],
+    div[data-testid="stTextInput"] [data-baseweb="input"] > div {
         background-color: #FFFFFF !important;
-        color: #000000 !important;
-        caret-color: #000000 !important;
         border: 1px solid #2D2D2D !important;
         border-radius: 8px !important;
-        height: 44px !important;
+    }
+
+    .stTextInput [data-baseweb="input"] input,
+    div[data-testid="stTextInput"] input {
+        background-color: transparent !important;
+        color: #000000 !important;
+        caret-color: #000000 !important;
+        border: none !important;
+        box-shadow: none !important;
         font-size: 14px !important;
         font-family: 'Inter', sans-serif !important;
-        transition: all 0.2s ease !important;
+        height: 42px !important;
     }
 
-    .stTextInput > div > div > input:focus {
-        border-color: #FFFFFF !important;
-        box-shadow: 0 0 0 2px rgba(255,255,255,0.2) !important;
-    }
-
-    .stTextInput > div > div > input::placeholder {
+    .stTextInput [data-baseweb="input"] input::placeholder,
+    div[data-testid="stTextInput"] input::placeholder {
         color: #999999 !important;
         font-size: 14px !important;
     }
@@ -179,6 +184,45 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
         font-size: 13px !important;
         font-weight: 500 !important;
+    }
+
+    /* Password Eye Visibility Toggle Icon */
+    .stTextInput [data-baseweb="input"] button,
+    div[data-testid="stTextInput"] button {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        cursor: pointer !important;
+        padding: 0 10px !important;
+    }
+
+    .material-symbols-outlined,
+    [class*="material-symbols"],
+    [data-testid="stIcon"],
+    .stTextInput button *,
+    .stTextInput button span,
+    div[data-testid="stTextInput"] button *,
+    div[data-testid="stTextInput"] button span {
+        font-family: 'Material Symbols Outlined', 'Material Icons' !important;
+        font-style: normal !important;
+        font-weight: normal !important;
+        font-size: 20px !important;
+        line-height: 1 !important;
+        letter-spacing: normal !important;
+        text-transform: none !important;
+        display: inline-block !important;
+        white-space: nowrap !important;
+        word-wrap: normal !important;
+        direction: ltr !important;
+        -webkit-font-feature-settings: 'liga' !important;
+        -webkit-font-smoothing: antialiased !important;
+        font-feature-settings: 'liga' !important;
+        color: #555555 !important;
+    }
+
+    .stTextInput button:hover *,
+    div[data-testid="stTextInput"] button:hover * {
+        color: #000000 !important;
     }
 
     /* Selectbox label, control box, and black text */
