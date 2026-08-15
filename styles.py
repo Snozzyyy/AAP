@@ -282,6 +282,9 @@ GLOBAL_CSS = """
         cursor: pointer !important;
         transition: all 0.2s ease !important;
         font-family: 'Inter', sans-serif !important;
+        white-space: nowrap !important;
+        word-break: keep-all !important;
+        padding: 0 12px !important;
     }
 
     .stButton > button:hover,

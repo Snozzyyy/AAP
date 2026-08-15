@@ -119,7 +119,7 @@ def show_admin_dashboard():
         st.markdown('<div class="empty-state">No registered users yet</div>', unsafe_allow_html=True)
     else:
         # Table header
-        header_cols = st.columns([2.5, 3, 1.5, 1.5, 1.5])
+        header_cols = st.columns([2, 3, 1.3, 1.3, 2.4])
         header_cols[0].markdown('<span class="table-header">NAME</span>', unsafe_allow_html=True)
         header_cols[1].markdown('<span class="table-header">EMAIL</span>', unsafe_allow_html=True)
         header_cols[2].markdown('<span class="table-header">ROLE</span>', unsafe_allow_html=True)
@@ -130,7 +130,7 @@ def show_admin_dashboard():
 
         # Table rows
         for u in users:
-            row = st.columns([2.5, 3, 1.5, 1.5, 1.5])
+            row = st.columns([2, 3, 1.3, 1.3, 2.4])
             row[0].markdown(f'<span style="font-size:14px;">{u["name"]}</span>', unsafe_allow_html=True)
             row[1].markdown(f'<span style="font-size:14px;color:#A0A0A0;">{u["email"]}</span>', unsafe_allow_html=True)
             row[2].markdown(f'<span style="font-size:14px;">{u["role"].capitalize()}</span>', unsafe_allow_html=True)
