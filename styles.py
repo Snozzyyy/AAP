@@ -682,11 +682,10 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
     }
 
-    /* Chat Avatar Styling - Real Material Symbols icons */
+    /* Chat Avatar Container */
     [data-testid="stChatMessageAvatar"],
     [data-testid="stChatMessage"] [data-testid*="chatAvatar"],
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"],
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
+    [data-testid="stChatMessage"] [data-testid*="Avatar"] {
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
@@ -697,52 +696,16 @@ GLOBAL_CSS = """
         border-radius: 8px !important;
         background-color: #1A1A1A !important;
         border: 1px solid #2D2D2D !important;
-        padding: 0 !important;
-        margin-right: 12px !important;
-        overflow: visible !important;
-    }
-
-    [data-testid="stChatMessage"] [data-testid*="chatAvatar"] *,
-    [data-testid="stChatMessage"] [data-testid*="chatAvatar"] span,
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] span,
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] span {
-        font-family: 'Material Symbols Outlined', 'Material Icons' !important;
-        font-style: normal !important;
-        font-weight: normal !important;
         font-size: 20px !important;
         line-height: 1 !important;
-        letter-spacing: normal !important;
-        text-transform: none !important;
-        display: inline-block !important;
-        white-space: nowrap !important;
-        word-wrap: normal !important;
-        direction: ltr !important;
-        -webkit-font-feature-settings: 'liga' !important;
-        -webkit-font-smoothing: antialiased !important;
-        font-feature-settings: 'liga' !important;
-        visibility: visible !important;
+        padding: 0 !important;
+        margin-right: 12px !important;
     }
 
-    /* Assistant Robot Icon */
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] {
-        background-color: #221C11 !important;
-        border-color: #E28743 !important;
-    }
-
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] *,
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-assistant"] span {
-        color: #E28743 !important;
-    }
-
-    /* User Human Face Icon */
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] {
-        background-color: #111A26 !important;
-        border-color: #4A90E2 !important;
-    }
-
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] *,
-    [data-testid="stChatMessage"] [data-testid="chatAvatarIcon-user"] span {
-        color: #4A90E2 !important;
+    [data-testid="stChatMessageAvatar"] *,
+    [data-testid="stChatMessage"] [data-testid*="chatAvatar"] * {
+        font-size: 20px !important;
+        line-height: 1 !important;
     }
 
     /* Bottom Fixed Container & Chat Input Bar */

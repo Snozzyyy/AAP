@@ -314,7 +314,8 @@ def show_ai_symptom_diagnoser():
 
     # ── Render Chat History ──────────────────────────────────────────────
     for msg in st.session_state["chatbot_messages"]:
-        with st.chat_message(msg["role"]):
+        avatar = "🤖" if msg.get("role") == "assistant" else "👤"
+        with st.chat_message(msg["role"], avatar=avatar):
             st.markdown(msg["content"])
 
             if msg["role"] == "assistant" and isinstance(msg.get("data"), dict):
@@ -346,10 +347,10 @@ def show_ai_symptom_diagnoser():
         st.session_state["chatbot_messages"].append(
             {"role": "user", "content": user_input}
         )
-        with st.chat_message("user"):
+        with st.chat_message("user", avatar="👤"):
             st.markdown(user_input)
 
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar="🤖"):
             with st.spinner("Analyzing your symptoms..."):
                 gemini_client = get_gemini_client(
                     st.session_state["chatbot_api_key"]
