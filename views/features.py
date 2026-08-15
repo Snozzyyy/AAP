@@ -1,7 +1,7 @@
 import streamlit as st
-import book_appointment
+from views import appointment as book_appointment
 from styles import coming_soon_page
-from pages_risk_alert import show_risk_alert_page
+from views.risk_alert import show_risk_alert_page
 
 
 FEATURE_ROUTES = {

@@ -1,10 +1,11 @@
 import streamlit as st
 from database import init_db
-from pages_auth import show_login, show_signup
-from pages_dashboards import show_patient_dashboard, show_doctor_dashboard
-from pages_admin import show_admin_dashboard
-from pages_features import show_feature_page, FEATURE_ROUTES
-from patient_info import show as show_patient_info
+from views.auth import show_login, show_signup
+from views.dashboards import show_patient_dashboard, show_doctor_dashboard
+from views.admin import show_admin_dashboard
+from views.features import show_feature_page, FEATURE_ROUTES
+from views.patient_info import show as show_patient_info
+from views.chatbot import show_ai_symptom_diagnoser
 
 st.set_page_config(
     page_title="Healthify",
@@ -43,7 +44,6 @@ elif page == "admin_dashboard":
 elif page == "patient_info":
     show_patient_info()
 elif page == "feature_ai_symptom_patient":
-    from pages_chatbot import show_ai_symptom_diagnoser
     show_ai_symptom_diagnoser()
 elif page in FEATURE_ROUTES:
     show_feature_page(page)

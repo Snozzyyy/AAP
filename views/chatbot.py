@@ -15,7 +15,7 @@ os.environ["MLCOMPUTE_DEVICE"] = "cpu"
 from styles import inject_css, nav_bar, footer
 
 # ─── Constants ────────────────────────────────────────────────────────────────
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 MODEL_PATH_PRIMARY = os.path.join(BASE_DIR, "models", "optimised_model.keras")
 MODEL_PATH_FALLBACK = os.path.join(BASE_DIR, "models", "best_model.keras")
