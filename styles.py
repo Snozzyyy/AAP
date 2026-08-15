@@ -2,7 +2,7 @@ import streamlit as st
 
 GLOBAL_CSS = """
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
     /* Global Reset */
     html, body, .stApp, .main, .block-container,
@@ -50,12 +50,8 @@ GLOBAL_CSS = """
     }
 
     /* Typography */
-    h1, h2, h3, h4, h5, h6, label {
+    h1, h2, h3, h4, h5, h6, p, label, div {
         color: #FFFFFF !important;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-    }
-
-    p, span, .stMarkdown {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
     }
 
@@ -153,261 +149,38 @@ GLOBAL_CSS = """
         box-shadow: none !important;
     }
 
-    /* Text Input & Password Input container */
-    div[data-testid="stTextInput"] [data-baseweb="input"],
-    div[data-testid="stTextInput"] [data-baseweb="input"] > div,
-    .stTextInput [data-baseweb="input"],
-    .stTextInput [data-baseweb="input"] > div {
+    .stTextInput > div > div > input {
         background-color: #FFFFFF !important;
-        background: #FFFFFF !important;
+        color: #000000 !important;
+        caret-color: #000000 !important;
         border: 1px solid #2D2D2D !important;
         border-radius: 8px !important;
-        min-height: 44px !important;
         height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-
-    div[data-testid="stTextInput"] input,
-    .stTextInput input,
-    .stTextInput > div > div > input {
-        background-color: transparent !important;
-        background: transparent !important;
-        color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-        caret-color: #000000 !important;
-        border: none !important;
-        height: 42px !important;
         font-size: 14px !important;
         font-family: 'Inter', sans-serif !important;
-        padding-left: 12px !important;
-        padding-right: 8px !important;
-        box-shadow: none !important;
-        flex: 1 !important;
+        transition: all 0.2s ease !important;
     }
 
-    div[data-testid="stTextInput"] input:focus,
-    .stTextInput input:focus {
-        border: none !important;
-        box-shadow: none !important;
-        outline: none !important;
+    .stTextInput > div > div > input:focus {
+        border-color: #FFFFFF !important;
+        box-shadow: 0 0 0 2px rgba(255,255,255,0.2) !important;
     }
 
-    div[data-testid="stTextInput"] input::placeholder,
-    .stTextInput input::placeholder {
+    .stTextInput > div > div > input::placeholder {
         color: #999999 !important;
         font-size: 14px !important;
     }
 
-    div[data-testid="stTextInput"] label,
     .stTextInput label {
         color: #FFFFFF !important;
         font-size: 13px !important;
         font-weight: 500 !important;
     }
 
-    /* Password Visibility Eye Toggle Button */
-    div[data-testid="stTextInput"] button,
-    div[data-testid="stTextInput"] [data-baseweb="input"] button,
-    .stTextInput button {
-        background: transparent !important;
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        height: 100% !important;
-        min-height: unset !important;
-        padding: 0 12px !important;
-        margin: 0 !important;
-        cursor: pointer !important;
-        text-transform: none !important;
-        letter-spacing: normal !important;
-        transform: none !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-    }
-
-    div[data-testid="stTextInput"] button:hover,
-    .stTextInput button:hover {
-        background: transparent !important;
-        background-color: transparent !important;
-        border: none !important;
-        transform: none !important;
-    }
-
-    div[data-testid="stTextInput"] button *,
-    div[data-testid="stTextInput"] button span,
-    div[data-testid="stTextInput"] button [data-testid="stIcon"],
-    .stTextInput button *,
-    .stTextInput button span {
-        font-family: 'Material Symbols Outlined', 'Material Icons', sans-serif !important;
-        font-size: 20px !important;
-        color: #555555 !important;
-        text-transform: none !important;
-        letter-spacing: normal !important;
-        font-weight: normal !important;
-        line-height: 1 !important;
-        background: transparent !important;
-    }
-
-    div[data-testid="stTextInput"] button:hover *,
-    .stTextInput button:hover * {
-        color: #000000 !important;
-    }
-
-    /* ─── Selectbox ─────────────────────────────────────────────────── */
-    div[data-testid="stSelectbox"] label,
-    .stSelectbox label {
-        color: #FFFFFF !important;
-        font-size: 13px !important;
-        font-weight: 500 !important;
-    }
-
-    div[data-testid="stSelectbox"] [data-baseweb="select"],
-    div[data-testid="stSelectbox"] [data-baseweb="select"] > div,
-    .stSelectbox [data-baseweb="select"],
-    .stSelectbox [data-baseweb="select"] > div {
-        background-color: #FFFFFF !important;
-        background: #FFFFFF !important;
-        border: 1px solid #2D2D2D !important;
-        border-radius: 8px !important;
-        min-height: 44px !important;
-        height: 44px !important;
-    }
-
-    /* Target all text nodes and containers inside selectbox */
-    div[data-testid="stSelectbox"] [data-baseweb="select"] *,
-    div[data-testid="stSelectbox"] [data-baseweb="select"] div,
-    div[data-testid="stSelectbox"] [data-baseweb="select"] span,
-    div[data-testid="stSelectbox"] [data-baseweb="select"] p,
-    div[data-testid="stSelectbox"] [data-baseweb="select"] input,
-    .stSelectbox [data-baseweb="select"] *,
-    .stSelectbox [data-baseweb="select"] div,
-    .stSelectbox [data-baseweb="select"] span,
-    .stSelectbox [data-baseweb="select"] p,
-    .stSelectbox [data-baseweb="select"] input,
-    div[data-baseweb="select"] *,
-    div[data-baseweb="select"] div,
-    div[data-baseweb="select"] span,
-    div[data-baseweb="select"] p,
-    div[data-baseweb="select"] input {
-        color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-        font-family: 'Inter', sans-serif !important;
-        font-size: 14px !important;
-        font-weight: 500 !important;
-        opacity: 1 !important;
-    }
-
-    /* Reset button inside selectbox so no black box appears on arrow */
-    div[data-testid="stSelectbox"] button,
-    div[data-testid="stSelectbox"] [role="button"],
-    .stSelectbox button {
-        background: transparent !important;
-        background-color: transparent !important;
-        border: none !important;
-        box-shadow: none !important;
-        height: auto !important;
-        min-height: unset !important;
-        padding: 0 8px !important;
-        margin: 0 !important;
-    }
-
-    /* Selectbox Arrow Icon */
-    div[data-testid="stSelectbox"] svg,
-    div[data-baseweb="select"] svg,
-    .stSelectbox svg {
-        fill: #000000 !important;
-        color: #000000 !important;
-    }
-
-    /* ─── Dropdown Menu Popover ──────────────────────────────────────── */
-    [data-baseweb="popover"],
-    [data-baseweb="popover"] > div,
-    [data-baseweb="menu"],
-    ul[data-baseweb="menu"],
-    ul[role="listbox"],
-    div[role="listbox"],
-    [data-testid="stSelectboxVirtualDropdown"],
-    [data-testid="stSelectboxVirtualDropdown"] > div,
-    div[data-testid*="Dropdown"],
-    div[data-testid*="dropdown"] {
-        background-color: #FFFFFF !important;
-        background: #FFFFFF !important;
-        border: 1px solid #CCCCCC !important;
-        border-radius: 8px !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
-    }
-
-    [data-baseweb="popover"] *,
-    [data-baseweb="menu"] *,
-    ul[data-baseweb="menu"] *,
-    ul[role="listbox"] *,
-    div[role="listbox"] *,
-    li[role="option"],
-    li[role="option"] *,
-    div[role="option"],
-    div[role="option"] *,
-    [data-testid="stSelectboxVirtualDropdown"] *,
-    [data-testid="stSelectboxVirtualDropdown"] p,
-    [data-testid="stSelectboxVirtualDropdown"] span,
-    [data-testid="stSelectboxVirtualDropdown"] div {
-        color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-        font-family: 'Inter', sans-serif !important;
-    }
-
-    li[role="option"],
-    div[role="option"] {
-        background-color: #FFFFFF !important;
-        background: #FFFFFF !important;
-        color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-        cursor: pointer !important;
-    }
-
-    li[role="option"] > div,
-    div[role="option"] > div,
-    li[role="option"] [data-testid="stMarkdownContainer"],
-    div[role="option"] [data-testid="stMarkdownContainer"] {
-        background-color: transparent !important;
-        color: #000000 !important;
-    }
-
-    /* Selected option in dropdown menu */
-    [role="option"][aria-selected="true"],
-    [role="option"][aria-selected="true"] *,
-    li[role="option"][aria-selected="true"],
-    div[role="option"][aria-selected="true"],
-    [data-baseweb="menu"] [role="option"][aria-selected="true"],
-    ul[role="listbox"] [role="option"][aria-selected="true"],
-    [data-testid="stSelectboxVirtualDropdown"] [role="option"][aria-selected="true"] {
-        background-color: #E8E8E8 !important;
-        background: #E8E8E8 !important;
-        color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-        font-weight: 600 !important;
-    }
-
-    /* Hover option in dropdown menu */
-    [role="option"]:hover,
-    [role="option"]:hover *,
-    li[role="option"]:hover,
-    div[role="option"]:hover,
-    [data-baseweb="menu"] [role="option"]:hover,
-    ul[role="listbox"] [role="option"]:hover,
-    [data-testid="stSelectboxVirtualDropdown"] [role="option"]:hover {
-        background-color: #F2F2F2 !important;
-        background: #F2F2F2 !important;
-        color: #000000 !important;
-        -webkit-text-fill-color: #000000 !important;
-    }
-
-    /* ─── Buttons: Only real action buttons (LOGIN, SIGN UP, OPEN, etc.) */
-    div[data-testid="stButton"] > button,
-    div[data-testid="stFormSubmitButton"] > button {
+    /* Buttons - Primary (black bg, white text, grey border) */
+    .stButton > button,
+    .stFormSubmitButton > button {
         background-color: #000000 !important;
-        background: #000000 !important;
         color: #FFFFFF !important;
         border: 1px solid #2D2D2D !important;
         border-radius: 8px !important;
@@ -419,36 +192,23 @@ GLOBAL_CSS = """
         cursor: pointer !important;
         transition: all 0.2s ease !important;
         font-family: 'Inter', sans-serif !important;
-        box-shadow: none !important;
     }
 
-    div[data-testid="stButton"] > button:hover,
-    div[data-testid="stFormSubmitButton"] > button:hover {
+    .stButton > button:hover,
+    .stFormSubmitButton > button:hover {
         background-color: #111111 !important;
-        background: #111111 !important;
         color: #FFFFFF !important;
         border-color: #3D3D3D !important;
         transform: translateY(-1px);
     }
 
-    div[data-testid="stButton"] > button:active,
-    div[data-testid="stFormSubmitButton"] > button:active {
-        background-color: #000000 !important;
-        background: #000000 !important;
+    .stButton > button:active,
+    .stFormSubmitButton > button:active {
         transform: translateY(0px);
     }
 
-    div[data-testid="stButton"] > button:focus,
-    div[data-testid="stFormSubmitButton"] > button:focus {
-        background-color: #000000 !important;
-        background: #000000 !important;
-        color: #FFFFFF !important;
-        border-color: #3D3D3D !important;
-        box-shadow: none !important;
-    }
-
-    div[data-testid="stButton"] > button:disabled,
-    div[data-testid="stFormSubmitButton"] > button:disabled {
+    .stButton > button:disabled,
+    .stFormSubmitButton > button:disabled {
         opacity: 0.6 !important;
         cursor: not-allowed !important;
     }
