@@ -50,8 +50,12 @@ GLOBAL_CSS = """
     }
 
     /* Typography */
-    h1, h2, h3, h4, h5, h6, p, label, div {
+    h1, h2, h3, h4, h5, h6, label {
         color: #FFFFFF !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    }
+
+    p, span, .stMarkdown {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
     }
 
@@ -175,6 +179,48 @@ GLOBAL_CSS = """
         color: #FFFFFF !important;
         font-size: 13px !important;
         font-weight: 500 !important;
+    }
+
+    /* Selectbox label, control box, and black text */
+    .stSelectbox label {
+        color: #FFFFFF !important;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+    }
+
+    .stSelectbox [data-baseweb="select"] > div {
+        background-color: #FFFFFF !important;
+        border: 1px solid #2D2D2D !important;
+        border-radius: 8px !important;
+    }
+
+    .stSelectbox [data-baseweb="select"] *,
+    .stSelectbox [data-baseweb="select"] div,
+    .stSelectbox [data-baseweb="select"] span,
+    .stSelectbox [data-baseweb="select"] p,
+    .stSelectbox [data-baseweb="select"] input,
+    div[data-baseweb="select"] *,
+    div[data-baseweb="select"] div,
+    div[data-baseweb="select"] span,
+    div[data-baseweb="select"] p,
+    [data-baseweb="popover"] *,
+    [data-baseweb="popover"] div,
+    [data-baseweb="popover"] span,
+    [data-baseweb="popover"] p,
+    [data-baseweb="popover"] li,
+    [data-baseweb="menu"] *,
+    [data-baseweb="menu"] div,
+    [data-baseweb="menu"] span,
+    [data-baseweb="menu"] li,
+    ul[role="listbox"] *,
+    ul[role="listbox"] li,
+    ul[role="listbox"] div,
+    [data-testid="stSelectboxVirtualDropdown"] *,
+    [data-testid="stSelectboxVirtualDropdown"] div,
+    [data-testid="stSelectboxVirtualDropdown"] span,
+    [data-testid="stSelectboxVirtualDropdown"] p {
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
     }
 
     /* Buttons - Primary (black bg, white text, grey border) */
