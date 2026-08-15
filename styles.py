@@ -50,8 +50,12 @@ GLOBAL_CSS = """
     }
 
     /* Typography */
-    h1, h2, h3, h4, h5, h6, p, label, div {
+    h1, h2, h3, h4, h5, h6, label {
         color: #FFFFFF !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    }
+
+    p, span, .stMarkdown {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
     }
 
@@ -178,44 +182,60 @@ GLOBAL_CSS = """
     }
 
     /* Select box */
-    .stSelectbox label {
+    .stSelectbox label,
+    div[data-testid="stSelectbox"] label,
+    div[data-testid="stSelectbox"] label p,
+    div[data-testid="stSelectbox"] label span {
         color: #FFFFFF !important;
         font-size: 13px !important;
         font-weight: 500 !important;
     }
 
-    .stSelectbox > div > div {
+    div[data-testid="stSelectbox"] > div > div,
+    .stSelectbox > div > div,
+    div[data-baseweb="select"],
+    div[data-baseweb="select"] > div {
         background-color: #FFFFFF !important;
+        background: #FFFFFF !important;
         color: #000000 !important;
         border: 1px solid #2D2D2D !important;
         border-radius: 8px !important;
         min-height: 44px !important;
     }
 
-    .stSelectbox [data-baseweb="select"] {
-        background-color: #FFFFFF !important;
-        border-radius: 8px !important;
-    }
-
-    .stSelectbox [data-baseweb="select"] > div {
-        background-color: #FFFFFF !important;
-        color: #000000 !important;
-        border-radius: 8px !important;
-    }
-
-    .stSelectbox [data-baseweb="select"] *,
-    .stSelectbox [data-baseweb="select"] span,
-    .stSelectbox [data-baseweb="select"] div,
-    .stSelectbox [data-baseweb="select"] p,
-    .stSelectbox [data-baseweb="select"] input,
-    .stSelectbox [data-testid="stMarkdownContainer"],
+    /* Selected Option Text inside the select box */
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] *,
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] div,
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] span,
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] p,
+    div[data-testid="stSelectbox"] div[data-baseweb="select"] input,
+    div[data-testid="stSelectbox"] [data-testid="stMarkdownContainer"],
+    div[data-testid="stSelectbox"] [data-testid="stMarkdownContainer"] p,
+    div[data-testid="stSelectbox"] [data-testid="stMarkdownContainer"] span,
+    div[data-testid="stSelectbox"] [data-testid="stMarkdownContainer"] div,
+    .stSelectbox div[data-baseweb="select"] *,
+    .stSelectbox div[data-baseweb="select"] div,
+    .stSelectbox div[data-baseweb="select"] span,
+    .stSelectbox div[data-baseweb="select"] p,
+    .stSelectbox div[data-baseweb="select"] input,
+    .stSelectbox [data-testid="stMarkdownContainer"] *,
     .stSelectbox [data-testid="stMarkdownContainer"] p,
-    div[data-testid="stSelectbox"] p {
+    div[data-baseweb="select"] *,
+    div[data-baseweb="select"] span,
+    div[data-baseweb="select"] div,
+    div[data-baseweb="select"] p,
+    div[data-baseweb="select"] input,
+    div[data-baseweb="select"] [role="combobox"],
+    div[data-baseweb="select"] [aria-selected="true"],
+    div[data-baseweb="select"] [aria-selected="true"] * {
         color: #000000 !important;
         -webkit-text-fill-color: #000000 !important;
+        font-family: 'Inter', sans-serif !important;
+        font-size: 14px !important;
     }
 
-    .stSelectbox [data-baseweb="select"] svg,
+    div[data-testid="stSelectbox"] svg,
+    div[data-baseweb="select"] svg,
     .stSelectbox svg {
         fill: #000000 !important;
         color: #000000 !important;
@@ -303,9 +323,21 @@ GLOBAL_CSS = """
         -webkit-text-fill-color: #000000 !important;
     }
 
-    /* Buttons - Primary (black bg, white text, grey border) */
-    .stButton > button {
+    /* Buttons - All Primary, Secondary & Form Submit Buttons */
+    .stButton > button,
+    div[data-testid="stButton"] > button,
+    .stFormSubmitButton > button,
+    div[data-testid="stFormSubmitButton"] > button,
+    [data-testid="stFormSubmitButton"] button,
+    div[data-testid="stForm"] button,
+    button[kind="primaryFormSubmit"],
+    button[kind="secondaryFormSubmit"],
+    button[kind="primary"],
+    button[kind="secondary"],
+    button[data-testid*="FormSubmit"],
+    button[data-testid*="baseButton"] {
         background-color: #000000 !important;
+        background: #000000 !important;
         color: #FFFFFF !important;
         border: 1px solid #2D2D2D !important;
         border-radius: 8px !important;
@@ -317,20 +349,63 @@ GLOBAL_CSS = """
         cursor: pointer !important;
         transition: all 0.2s ease !important;
         font-family: 'Inter', sans-serif !important;
+        box-shadow: none !important;
     }
 
-    .stButton > button:hover {
+    .stButton > button:hover,
+    div[data-testid="stButton"] > button:hover,
+    .stFormSubmitButton > button:hover,
+    div[data-testid="stFormSubmitButton"] > button:hover,
+    [data-testid="stFormSubmitButton"] button:hover,
+    div[data-testid="stForm"] button:hover,
+    button[kind="primaryFormSubmit"]:hover,
+    button[kind="secondaryFormSubmit"]:hover,
+    button[kind="primary"]:hover,
+    button[kind="secondary"]:hover,
+    button[data-testid*="FormSubmit"]:hover,
+    button[data-testid*="baseButton"]:hover {
         background-color: #111111 !important;
+        background: #111111 !important;
         color: #FFFFFF !important;
         border-color: #3D3D3D !important;
         transform: translateY(-1px);
     }
 
-    .stButton > button:active {
+    .stButton > button:active,
+    div[data-testid="stButton"] > button:active,
+    .stFormSubmitButton > button:active,
+    div[data-testid="stFormSubmitButton"] > button:active,
+    [data-testid="stFormSubmitButton"] button:active,
+    div[data-testid="stForm"] button:active,
+    button[kind="primaryFormSubmit"]:active,
+    button[kind="secondaryFormSubmit"]:active,
+    button[data-testid*="FormSubmit"]:active,
+    button[data-testid*="baseButton"]:active {
+        background-color: #000000 !important;
+        background: #000000 !important;
         transform: translateY(0px);
     }
 
-    .stButton > button:disabled {
+    .stButton > button:focus,
+    div[data-testid="stButton"] > button:focus,
+    .stFormSubmitButton > button:focus,
+    div[data-testid="stFormSubmitButton"] > button:focus,
+    [data-testid="stFormSubmitButton"] button:focus,
+    div[data-testid="stForm"] button:focus,
+    button[kind="primaryFormSubmit"]:focus,
+    button[kind="secondaryFormSubmit"]:focus,
+    button[data-testid*="FormSubmit"]:focus,
+    button[data-testid*="baseButton"]:focus {
+        background-color: #000000 !important;
+        background: #000000 !important;
+        color: #FFFFFF !important;
+        border-color: #3D3D3D !important;
+        box-shadow: none !important;
+    }
+
+    .stButton > button:disabled,
+    .stFormSubmitButton > button:disabled,
+    div[data-testid="stForm"] button:disabled {
         opacity: 0.6 !important;
         cursor: not-allowed !important;
     }
