@@ -1,6 +1,7 @@
 import streamlit as st
 import book_appointment
 from styles import coming_soon_page
+from pages_risk_alert import show_risk_alert_page
 
 
 FEATURE_ROUTES = {
@@ -15,6 +16,10 @@ def show_feature_page(page_key: str):
     
     if page_key == "feature_book_appointment":
         book_appointment.show()
+        return
+    
+    if page_key == "feature_complication_risk":
+        show_risk_alert_page("doctor_dashboard")
         return
 
     # Everything else is Coming Soon

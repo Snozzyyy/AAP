@@ -1,0 +1,30 @@
+{
+  "features": [
+    "Age Group",
+    "CCSR Diagnosis Description",
+    "Type of Admission",
+    "Emergency Department Indicator",
+    "Gender",
+    "Race",
+    "APR Medical Surgical Description"
+  ],
+  "target": "APR Severity of Illness Description",
+  "target_mapping": {
+    "Minor": "Low Risk",
+    "Moderate": "Low Risk",
+    "Major": "Major",
+    "Extreme": "Extreme"
+  },
+  "selected_strategy": "Optuna Tuned",
+  "rows_used": 49968,
+  "test_metrics": {
+    "Accuracy": 0.7422625400213447,
+    "Balanced Accuracy": 0.6143710849591333,
+    "Macro Precision": 0.655372641728924,
+    "Macro Recall": 0.6143710849591333,
+    "Macro F1": 0.6303736107150213,
+    "Major Recall": 0.5031630170316301,
+    "Extreme Recall": 0.44025157232704404,
+    "Extreme Precision": 0.5401234567901234
+  }
+}
