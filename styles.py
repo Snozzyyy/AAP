@@ -708,6 +708,14 @@ GLOBAL_CSS = """
         line-height: 1 !important;
     }
 
+    [data-testid="stChatMessageAvatar"] img,
+    [data-testid="stChatMessage"] [data-testid*="chatAvatar"] img {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 8px !important;
+        object-fit: contain !important;
+    }
+
     /* Bottom Fixed Container & Chat Input Bar */
     [data-testid="stBottom"],
     [data-testid="stBottom"] > div,

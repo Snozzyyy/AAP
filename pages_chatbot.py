@@ -22,6 +22,8 @@ MODEL_PATH_FALLBACK = os.path.join(BASE_DIR, "models", "best_model.keras")
 MODEL_PATH_SAVED = os.path.join(BASE_DIR, "models", "disease_classifier_savedmodel")
 FEATURE_NAMES_PATH = os.path.join(BASE_DIR, "artifacts", "feature_names.json")
 LABEL_ENCODER_PATH = os.path.join(BASE_DIR, "artifacts", "label_encoder.pkl")
+BOT_AVATAR_PATH = os.path.join(BASE_DIR, "assets", "bot_avatar.svg")
+USER_AVATAR_PATH = os.path.join(BASE_DIR, "assets", "user_avatar.svg")
 
 GEMINI_MODEL = "gemini-2.5-flash"
 
@@ -314,7 +316,7 @@ def show_ai_symptom_diagnoser():
 
     # ── Render Chat History ──────────────────────────────────────────────
     for msg in st.session_state["chatbot_messages"]:
-        avatar = "🤖" if msg.get("role") == "assistant" else "👤"
+        avatar = BOT_AVATAR_PATH if msg.get("role") == "assistant" else USER_AVATAR_PATH
         with st.chat_message(msg["role"], avatar=avatar):
             st.markdown(msg["content"])
 
@@ -347,10 +349,10 @@ def show_ai_symptom_diagnoser():
         st.session_state["chatbot_messages"].append(
             {"role": "user", "content": user_input}
         )
-        with st.chat_message("user", avatar="👤"):
+        with st.chat_message("user", avatar=USER_AVATAR_PATH):
             st.markdown(user_input)
 
-        with st.chat_message("assistant", avatar="🤖"):
+        with st.chat_message("assistant", avatar=BOT_AVATAR_PATH):
             with st.spinner("Analyzing your symptoms..."):
                 gemini_client = get_gemini_client(
                     st.session_state["chatbot_api_key"]
