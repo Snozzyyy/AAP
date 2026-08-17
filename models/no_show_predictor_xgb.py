@@ -46,7 +46,7 @@ def create_features(patient, appointment):
 def predict_no_show(patient, appointment):
     X = create_features(patient, appointment)
     probability = model.predict_proba(X)[0][1]
-    risk = "HIGH" if probability >= 0.5 else "LOW"
+    risk = "HIGH" if probability >= 0.4 else "LOW"
     return {
         "probability": round(probability, 3),
         "risk": risk
