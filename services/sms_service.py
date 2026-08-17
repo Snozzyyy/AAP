@@ -52,7 +52,7 @@ def send_sms(phone_number, message):
         if response.ok:
             data = response.json()
 
-            st.success("WhatsApp message sent successfully!")
+            st.success("Appointment booked! You'll receive a reminder 30 minutes before your appointment!")
             # st.write("Recipient:", recipient)
             # st.write("Message ID:", data.get("messageId"))
             # st.write("Status:", data.get("status"))
