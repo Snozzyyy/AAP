@@ -64,6 +64,50 @@ def predict_risk(patient_df):
 
     return str(risk_label)
 
+def get_valid_diagnoses():
+    bundle = load_model_bundle()
+    encoder = bundle["encoder"]
+
+    diagnosis_column = "CCSR Diagnosis Description"
+
+    for _, transformer, columns in encoder.transformers_:
+        if transformer == "drop":
+            continue
+
+        columns = list(columns)
+
+        if diagnosis_column not in columns:
+            continue
+
+        # In case the transformer is inside a Pipeline
+        if hasattr(transformer, "named_steps"):
+            one_hot_encoder = None
+
+            for step in transformer.named_steps.values():
+                if hasattr(step, "categories_"):
+                    one_hot_encoder = step
+                    break
+        else:
+            one_hot_encoder = transformer
+
+        if one_hot_encoder is None or not hasattr(
+            one_hot_encoder, "categories_"
+        ):
+            raise ValueError(
+                "Could not locate diagnosis categories in the model encoder."
+            )
+
+        diagnosis_index = columns.index(diagnosis_column)
+
+        return sorted(
+            str(value)
+            for value in one_hot_encoder.categories_[diagnosis_index]
+        )
+
+    raise ValueError(
+        "CCSR Diagnosis Description was not found in the model encoder."
+    )
+
 
 def generate_alert(risk_level, patient_data):
     api_key = st.secrets["GEMINI_API_KEY"]
