@@ -4,3 +4,5 @@ numpy
 google-genai
 scikit-learn
 xgboost
+joblib
+reportlab

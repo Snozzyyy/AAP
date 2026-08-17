@@ -90,6 +90,60 @@ CREATE TABLE IF NOT EXISTS appointments (
     FOREIGN KEY(patient_id) REFERENCES patients(id)
 )
 """)
+
+    # Doctor clinical records (merged from GenAI/clinical-notes feature)
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS medical_records (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            doctor_id INTEGER NOT NULL,
+            patient_name TEXT NOT NULL,
+            patient_age TEXT,
+            patient_nric TEXT,
+            patient_gender TEXT,
+            temp TEXT,
+            bp TEXT,
+            hr TEXT,
+            spo2 TEXT,
+            symptoms TEXT NOT NULL DEFAULT '',
+            patient_complaint TEXT,
+            doctor_notes TEXT,
+            prediction TEXT,
+            icd10 TEXT,
+            ai_diagnosis TEXT,
+            confirmed_findings TEXT,
+            final_clinical_record TEXT,
+            treatment TEXT,
+            prescription TEXT,
+            referral_letter TEXT,
+            status TEXT NOT NULL DEFAULT 'Draft'
+                CHECK(status IN ('Draft', 'Archived', 'Pending_Review')),
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL,
+            FOREIGN KEY(doctor_id) REFERENCES users(id)
+        )
+    """)
+
+    cursor.execute("PRAGMA table_info(medical_records)")
+    medical_record_columns = {row[1] for row in cursor.fetchall()}
+
+    if "patient_age" not in medical_record_columns:
+        cursor.execute("ALTER TABLE medical_records ADD COLUMN patient_age TEXT")
+    if "patient_nric" not in medical_record_columns:
+        cursor.execute("ALTER TABLE medical_records ADD COLUMN patient_nric TEXT")
+    if "patient_gender" not in medical_record_columns:
+        cursor.execute("ALTER TABLE medical_records ADD COLUMN patient_gender TEXT")
+
+    if "patient_complaint" not in medical_record_columns:
+        cursor.execute("ALTER TABLE medical_records ADD COLUMN patient_complaint TEXT")
+    if "doctor_notes" not in medical_record_columns:
+        cursor.execute("ALTER TABLE medical_records ADD COLUMN doctor_notes TEXT")
+    if "ai_diagnosis" not in medical_record_columns:
+        cursor.execute("ALTER TABLE medical_records ADD COLUMN ai_diagnosis TEXT")
+    if "confirmed_findings" not in medical_record_columns:
+        cursor.execute("ALTER TABLE medical_records ADD COLUMN confirmed_findings TEXT")
+    if "final_clinical_record" not in medical_record_columns:
+        cursor.execute("ALTER TABLE medical_records ADD COLUMN final_clinical_record TEXT")
+
     conn.commit()
     conn.close()
 
@@ -327,3 +381,197 @@ def create_appointment(appointment):
         raise
     finally:
         conn.close()
+
+
+# ==================================================
+# Doctor clinical record CRUD
+# ==================================================
+def save_medical_record(
+    record_id,
+    doctor_id,
+    patient_name,
+    patient_age,
+    patient_nric,
+    patient_gender,
+    temp,
+    bp,
+    hr,
+    spo2,
+    patient_complaint,
+    doctor_notes,
+    prediction,
+    icd10,
+    ai_diagnosis,
+    confirmed_findings,
+    final_clinical_record,
+    treatment,
+    prescription,
+    referral_letter,
+    status,
+):
+    conn = get_connection()
+    cursor = conn.cursor()
+    now = datetime.now().isoformat()
+
+    # Keep the legacy symptoms column populated for backward compatibility.
+    legacy_symptoms = patient_complaint or ""
+
+    try:
+        if record_id is None:
+            cursor.execute(
+                """
+                INSERT INTO medical_records
+                (
+                    doctor_id,
+                    patient_name,
+                    patient_age,
+                    patient_nric,
+                    patient_gender,
+                    temp,
+                    bp,
+                    hr,
+                    spo2,
+                    symptoms,
+                    patient_complaint,
+                    doctor_notes,
+                    prediction,
+                    icd10,
+                    ai_diagnosis,
+                    confirmed_findings,
+                    final_clinical_record,
+                    treatment,
+                    prescription,
+                    referral_letter,
+                    status,
+                    created_at,
+                    updated_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    doctor_id,
+                    patient_name,
+                    patient_age,
+                    patient_nric,
+                    patient_gender,
+                    temp,
+                    bp,
+                    hr,
+                    spo2,
+                    legacy_symptoms,
+                    patient_complaint,
+                    doctor_notes,
+                    prediction,
+                    icd10,
+                    ai_diagnosis,
+                    confirmed_findings,
+                    final_clinical_record,
+                    treatment,
+                    prescription,
+                    referral_letter,
+                    status,
+                    now,
+                    now,
+                ),
+            )
+        else:
+            cursor.execute(
+                """
+                UPDATE medical_records
+                SET
+                    patient_name=?,
+                    patient_age=?,
+                    patient_nric=?,
+                    patient_gender=?,
+                    temp=?,
+                    bp=?,
+                    hr=?,
+                    spo2=?,
+                    symptoms=?,
+                    patient_complaint=?,
+                    doctor_notes=?,
+                    prediction=?,
+                    icd10=?,
+                    ai_diagnosis=?,
+                    confirmed_findings=?,
+                    final_clinical_record=?,
+                    treatment=?,
+                    prescription=?,
+                    referral_letter=?,
+                    status=?,
+                    updated_at=?
+                WHERE id=? AND doctor_id=?
+                """,
+                (
+                    patient_name,
+                    patient_age,
+                    patient_nric,
+                    patient_gender,
+                    temp,
+                    bp,
+                    hr,
+                    spo2,
+                    legacy_symptoms,
+                    patient_complaint,
+                    doctor_notes,
+                    prediction,
+                    icd10,
+                    ai_diagnosis,
+                    confirmed_findings,
+                    final_clinical_record,
+                    treatment,
+                    prescription,
+                    referral_letter,
+                    status,
+                    now,
+                    record_id,
+                    doctor_id,
+                ),
+            )
+
+        conn.commit()
+
+    except Exception:
+        conn.rollback()
+        raise
+
+    finally:
+        conn.close()
+
+
+def get_records_by_doctor_and_status(doctor_id: int, status: str) -> list[dict]:
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        """
+        SELECT * FROM medical_records
+        WHERE doctor_id = ? AND status = ?
+        ORDER BY updated_at DESC
+        """,
+        (doctor_id, status),
+    )
+    rows = cursor.fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
+
+def delete_medical_record(record_id: int, doctor_id: int):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "DELETE FROM medical_records WHERE id = ? AND doctor_id = ?",
+        (record_id, doctor_id),
+    )
+    conn.commit()
+    conn.close()
+
+
+def update_record_status(record_id: int, new_status: str):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE medical_records SET status = ?, updated_at = ? WHERE id = ?",
+        (new_status, datetime.now().isoformat(), record_id),
+    )
+    conn.commit()
+    conn.close()
