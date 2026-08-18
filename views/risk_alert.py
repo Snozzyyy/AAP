@@ -1,4 +1,8 @@
 import streamlit as st
+from database import (
+    save_risk_prediction,
+    get_risk_prediction_history,
+)
 
 from pipeline import (
     preprocess_input,
@@ -186,6 +190,22 @@ def show_risk_alert_page(back_page="doctor_dashboard"):
                 "risk_level": risk_level,
                 "alert": alert,
             }
+            user = st.session_state.get("user")
+            doctor_id = user["id"] if user else None
+            
+            
+            save_risk_prediction(
+                doctor_id=doctor_id,
+                age_group=age_group,
+                diagnosis=diagnosis,
+                admission_type=admission_type,
+                ed_indicator=ed_indicator,
+                gender=gender,
+                race=race,
+                apr_med_surg=apr_med_surg,
+                risk_level=risk_level,
+                alert_text=alert,
+            )
 
         except Exception as e:
             st.error("Risk assessment failed.")
@@ -225,5 +245,84 @@ def show_risk_alert_page(back_page="doctor_dashboard"):
             use_container_width=True,
             on_click=reset_risk_form,
         )
+    # Prediction History / Audit Log
+    st.divider()
+
+    with st.expander("View Prediction History / Audit Log"):
+
+        user = st.session_state.get("user")
+        doctor_id = user["id"] if user else None
+
+        history = get_risk_prediction_history(doctor_id)
+    
+        filter_col1, filter_col2 = st.columns(2)
+
+        with filter_col1:
+            risk_filter = st.selectbox(
+                "Filter by Risk Level",
+                ["All", "Low Risk", "Major", "Extreme"],
+            )
+
+        with filter_col2:
+            diagnosis_search = st.text_input(
+                "Search Diagnosis",
+                placeholder="e.g. SEPTICEMIA",
+            )
+
+        filtered_history = history
+
+        if risk_filter != "All":
+            filtered_history = [
+                record
+                for record in filtered_history
+                if record["risk_level"] == risk_filter
+            ]
+
+        if diagnosis_search.strip():
+            search_text = diagnosis_search.strip().lower()
+
+            filtered_history = [
+                record
+                for record in filtered_history
+                if search_text in record["diagnosis"].lower()
+            ]
+
+        if not filtered_history:
+            st.info("No matching risk assessments found.")
+
+        else:
+            for record in filtered_history:
+                created_at = record["created_at"].replace("T", " ")[:19]
+
+                title = (
+                    f"{created_at} — "
+                    f"{record['risk_level']} — "
+                    f"{record['diagnosis']}"
+                )
+
+                with st.expander(title):
+                    left, right = st.columns(2)
+
+                    with left:
+                        st.write(f"**Age Group:** {record['age_group']}")
+                        st.write(f"**Admission Type:** {record['admission_type']}")
+                        st.write(f"**ED Indicator:** {record['ed_indicator']}")
+                        st.write(f"**Gender:** {record['gender']}")
+
+                    with right:
+                        st.write(f"**Race:** {record['race']}")
+                        st.write(
+                            f"**Medical/Surgical:** "
+                            f"{record['apr_med_surg']}"
+                        )
+                        st.write(
+                            f"**Predicted Risk:** "
+                            f"{record['risk_level']}"
+                        )
+
+                    st.write(f"**Diagnosis:** {record['diagnosis']}")
+
+                    st.markdown("**Nurse-facing Alert**")
+                    st.info(record["alert_text"])
     
     footer()

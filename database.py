@@ -575,3 +575,102 @@ def update_record_status(record_id: int, new_status: str):
     )
     conn.commit()
     conn.close()
+    
+
+# ==================================================
+# Complication Risk Prediction History / Audit Log
+# ==================================================
+
+def init_risk_history_table():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS risk_prediction_history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            doctor_id INTEGER,
+            age_group TEXT NOT NULL,
+            diagnosis TEXT NOT NULL,
+            admission_type TEXT NOT NULL,
+            ed_indicator TEXT NOT NULL,
+            gender TEXT NOT NULL,
+            race TEXT NOT NULL,
+            apr_med_surg TEXT NOT NULL,
+            risk_level TEXT NOT NULL,
+            alert_text TEXT NOT NULL,
+            created_at TEXT NOT NULL,
+            FOREIGN KEY(doctor_id) REFERENCES users(id)
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+
+def save_risk_prediction(
+    doctor_id,
+    age_group,
+    diagnosis,
+    admission_type,
+    ed_indicator,
+    gender,
+    race,
+    apr_med_surg,
+    risk_level,
+    alert_text,
+):
+    init_risk_history_table()
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO risk_prediction_history (
+            doctor_id,
+            age_group,
+            diagnosis,
+            admission_type,
+            ed_indicator,
+            gender,
+            race,
+            apr_med_surg,
+            risk_level,
+            alert_text,
+            created_at
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        doctor_id,
+        age_group,
+        diagnosis,
+        admission_type,
+        ed_indicator,
+        gender,
+        race,
+        apr_med_surg,
+        risk_level,
+        alert_text,
+        datetime.now().isoformat(),
+    ))
+
+    conn.commit()
+    conn.close()
+
+
+def get_risk_prediction_history(doctor_id):
+    init_risk_history_table()
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT *
+        FROM risk_prediction_history
+        WHERE doctor_id = ?
+        ORDER BY created_at DESC
+    """, (doctor_id,))
+
+    rows = cursor.fetchall()
+    conn.close()
+
+    return [dict(row) for row in rows]

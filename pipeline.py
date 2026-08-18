@@ -114,6 +114,41 @@ def generate_alert(risk_level, patient_data):
 
     client = genai.Client(api_key=api_key)
 
+    risk_guidance = {
+        "Low Risk": """
+The predicted risk is Low Risk.
+Use calm wording.
+Recommend routine monitoring and continued observation.
+Escalation should only be suggested if the patient's condition changes,
+new clinical concerns appear, or deterioration is observed.
+Do not make the alert sound urgent.
+""",
+
+        "Major": """
+The predicted risk is Major.
+Clearly state that the patient requires closer monitoring and timely clinical review.
+The escalation section should recommend prompt review by the appropriate healthcare provider
+if there are signs of deterioration or increasing clinical concern.
+Use stronger wording than Low Risk, but do not imply an emergency unless supported by the provided information.
+""",
+
+        "Extreme": """
+The predicted risk is Extreme.
+Clearly highlight that this is the highest predicted complication-risk category.
+Recommend close monitoring and prompt escalation to the appropriate healthcare provider.
+The escalation section should emphasise timely clinical review.
+Do not invent emergency symptoms or claim that the patient is currently unstable.
+""",
+    }
+
+    escalation_instruction = risk_guidance.get(
+        risk_level,
+        """
+Use cautious clinical decision-support wording.
+Clinical judgement is required.
+"""
+    )
+
     prompt = f"""
 You are generating a nurse-facing clinical decision-support alert.
 
@@ -128,6 +163,9 @@ Gender: {patient_data['gender']}
 Race: {patient_data['race']}
 Medical/Surgical: {patient_data['apr_med_surg']}
 
+Risk-specific instructions:
+{escalation_instruction}
+
 Use these headings:
 
 Risk summary:
@@ -135,9 +173,12 @@ Monitoring considerations:
 Escalation consideration:
 
 Keep the response under 120 words.
+Keep the wording concise and suitable for healthcare staff.
 Do not diagnose the patient.
 Do not recommend medication or dosage.
-Do not invent symptoms, vital signs, or medical history.
+Do not invent symptoms, vital signs, medical history, or clinical findings.
+Do not change the predicted risk level.
+Do not claim the patient is deteriorating unless that information was provided.
 Mention that clinical judgement is required.
 """
 
