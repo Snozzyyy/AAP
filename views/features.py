@@ -814,8 +814,26 @@ def show_active_cases():
     st.markdown(
         """
         <style>
-        /* Local styling only for PDF download buttons on this feature page.
-           Input fields use the project's existing global styles. */
+        /* Fix only the large multi-line text areas on this feature page.
+           Small text inputs keep the project's existing global styles. */
+        [data-testid="stTextArea"] textarea {
+            background-color: #0b1627 !important;
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+            caret-color: #ffffff !important;
+        }
+
+        [data-testid="stTextArea"] textarea::placeholder {
+            color: #8fa3bd !important;
+            -webkit-text-fill-color: #8fa3bd !important;
+            opacity: 1 !important;
+        }
+
+        [data-testid="stTextArea"] [data-baseweb="textarea"] {
+            background-color: #0b1627 !important;
+        }
+
+        /* Local styling only for PDF download buttons on this feature page. */
         [data-testid="stDownloadButton"] > button,
         [data-testid="stDownloadButton"] > button:hover,
         [data-testid="stDownloadButton"] button {
